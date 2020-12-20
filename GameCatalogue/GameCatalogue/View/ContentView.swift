@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+   
     var body: some View {
         TabView {
             GameMenu()
@@ -24,7 +25,7 @@ struct ContentView: View {
                     Text("Card")
                 }
             
-            Text("Profile")
+            Profile()
                 .tabItem {
                     Image(systemName: "person.crop.circle.fill")
                         .padding()
