@@ -19,7 +19,7 @@ struct GameRow: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .clipped()
-                    .frame(width: 180,height: 180)
+                    .frame(width: 150, height: 150, alignment: .center)
                     .cornerRadius(22)
                 
                 HStack(alignment: .center, spacing: 4) {

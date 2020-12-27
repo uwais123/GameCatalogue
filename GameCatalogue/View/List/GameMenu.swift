@@ -56,6 +56,7 @@ struct GameMenu: View {
                     ForEach(networking.games) { item in
                         NavigationLink(destination: GameDetail(game: item)) {
                             GameRow(game: item)
+                                
                         }.buttonStyle(PlainButtonStyle())
                     }
                 }).padding(.horizontal, 12)
@@ -100,6 +101,5 @@ struct SearchButton: View {
 struct GameMenu_Previews: PreviewProvider {
     static var previews: some View {
         GameMenu()
-        GameMenu().colorScheme(.dark)
     }
 }

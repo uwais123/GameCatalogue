@@ -18,7 +18,6 @@ struct GameSearchDetail: View {
             VStack(alignment: .leading) {
                 WebImage(url: URL(string: game.backgroundImage ?? "https://nostrahomes.com.au/uploads/cms/unknown.jpg"), options: .highPriority, context: nil)
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
                     .frame(height: 200, alignment: .center)
                     .cornerRadius(9)
                 
