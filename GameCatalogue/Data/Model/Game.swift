@@ -19,6 +19,7 @@ struct Games: Codable {
     }
 }
 
+
 struct Game: Codable, Identifiable {
     let id: Int
     let name: String
@@ -36,7 +37,23 @@ struct Game: Codable, Identifiable {
         case playtime
     }
     
-    
+}
+
+struct GameGenres: Codable {
+
+    let id: Int
+    let name: String
+    let slug: String
+    let gamesCount: Int
+    let imageBackground: String
+
+    private enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+        case slug = "slug"
+        case gamesCount = "games_count"
+        case imageBackground = "image_background"
+    }
 }
 
 struct GameDetails: Codable {
@@ -44,7 +61,7 @@ struct GameDetails: Codable {
     
 }
 
-// MARK: - PurpleData
+// MARK: - Search Game
 struct PurpleData: Codable {
     
     let results: [Result]?
@@ -55,7 +72,6 @@ struct PurpleData: Codable {
     }
 }
 
-// MARK: - Result
 struct Result: Codable, Identifiable {
     var id = UUID()
     let name: String?

@@ -1,5 +1,5 @@
 //
-//  GameViewModel.swift
+//  Networking.swift
 //  GameCatalogue
 //
 //  Created by Uwais Alqadri on 16/12/20.
@@ -8,10 +8,11 @@
 import Foundation
 import Alamofire
 
-class GameViewModel: ObservableObject {
+class Networking: ObservableObject {
     @Published var games = [Game]()
     @Published var searchedGame = [Result]()
     @Published var detail = String()
+//    @Published var genres = String()
     
     func getGameData(page: Int) {
         AF.request("\(Constants.BASE_URL)\(Constants.ENDPOINT)?page=\(page)")
@@ -38,7 +39,12 @@ class GameViewModel: ObservableObject {
 //    func getGameGenres(idGame: Int) {
 //        AF.request("\(Constants.BASE_URL)\(Constants.ENDPOINT)/\(String(idGame))")
 //            .validate()
-//            .responseDecodable(of: GameGenres.self)
+//            .responseDecodable(of: GameGenres.self, queue: DispatchQueue(label: "getGenres", qos: .userInteractive, attributes: .concurrent)) { response in
+//                guard let gameGenres = response.value else { return }
+//                DispatchQueue.main.async {
+//                    self.genres = gameGenres.name
+//                }
+//            }
 //
 //    }
     

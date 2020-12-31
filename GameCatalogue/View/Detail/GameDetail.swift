@@ -56,16 +56,16 @@ struct GameDetail: View {
                         .font(.headline)
                         .bold()
                         .padding(3)
-                        
+                    
                     Text(networking.self.formatText(word: self.networking.detail))
                         .font(.caption)
                         .padding(3)
                         .padding(.bottom)
-                    
                 }
             }
             .padding(.horizontal)
-        }.onAppear {
+        }
+        .onAppear {
             networking.self.getGameDetail(idGame: game.id)
         }
     }

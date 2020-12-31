@@ -7,11 +7,13 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
+import RealmSwift
 
 struct GameSearchDetail: View {
     
     @ObservedObject var networking = Networking()
     var game: Result
+    let realm = try! Realm()
     
     var body: some View {
         ScrollView {

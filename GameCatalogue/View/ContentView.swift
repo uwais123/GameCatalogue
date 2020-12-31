@@ -19,9 +19,9 @@ struct ContentView: View {
             
             Profile()
                 .tabItem {
-                    Image(systemName: "person.crop.circle.fill")
+                    Image(systemName: "heart.fill")
                         .padding()
-                    Text("Profile")
+                    Text("Favorite")
                 }
         }
     }

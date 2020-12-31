@@ -28,7 +28,7 @@ struct GameRow: View {
                         .frame(width: 12, height: 12)
                     Text(String(game.rating))
                         .font(.footnote)
-                        
+                    
                 }
                 .foregroundColor(.black)
                 .padding(10)
