@@ -1,5 +1,5 @@
 //
-//  Networking.swift
+//  GameViewModel.swift
 //  GameCatalogue
 //
 //  Created by Uwais Alqadri on 16/12/20.
@@ -8,11 +8,11 @@
 import Foundation
 import Alamofire
 
-class Networking: ObservableObject {
+class GameViewModel: ObservableObject {
     @Published var games = [Game]()
     @Published var searchedGame = [Result]()
     @Published var detail = String()
-  
+    
     func getGameData(page: Int) {
         AF.request("\(Constants.BASE_URL)\(Constants.ENDPOINT)?page=\(page)")
             .validate()
@@ -35,6 +35,13 @@ class Networking: ObservableObject {
             }
     }
     
+//    func getGameGenres(idGame: Int) {
+//        AF.request("\(Constants.BASE_URL)\(Constants.ENDPOINT)/\(String(idGame))")
+//            .validate()
+//            .responseDecodable(of: GameGenres.self)
+//
+//    }
+    
     func getSearchData(query: String) {
         AF.request("\(Constants.BASE_URL)\(Constants.ENDPOINT)?search=\(query)")
             .validate()
@@ -55,7 +62,7 @@ class Networking: ObservableObject {
 }
 
 struct Constants {
-
+    
     // https://api.rawg.io/api/games?page=1
     static var BASE_URL = "https://api.rawg.io/api/"
     static var API_KEY = "cb66c401448544e0a135f1d5757f685a"

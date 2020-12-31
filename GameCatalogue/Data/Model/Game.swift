@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import RealmSwift
+
 
 struct Games: Codable {
     
@@ -34,7 +36,7 @@ struct Game: Codable, Identifiable {
         case playtime
     }
     
-  
+    
 }
 
 struct GameDetails: Codable {
@@ -73,6 +75,7 @@ struct Result: Codable, Identifiable {
         
     }
 }
+
 
 
 
