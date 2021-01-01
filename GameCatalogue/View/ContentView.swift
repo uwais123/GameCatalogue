@@ -2,12 +2,16 @@
 //  ContentView.swift
 //  GameCatalogue
 //
-//  Created by Uwais Alqadri on 18/12/20.
+//  Created by Uwais Alqadri on 01/01/21.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    
+    init() {
+        UITabBar.appearance().barTintColor = UIColor.black
+    }
     
     var body: some View {
         TabView {
@@ -17,13 +21,13 @@ struct ContentView: View {
                     Text("Home")
                 }
             
-            Profile()
+            GameFavorite()
                 .tabItem {
                     Image(systemName: "heart.fill")
                         .padding()
                     Text("Favorite")
                 }
-        }
+        }.accentColor(.blue)
     }
 }
 

@@ -52,13 +52,22 @@ struct GameSearchDetail: View {
                         .padding(10)
                         .cornerRadius(10)
                         .padding(.bottom)
+                        
+                        Spacer()
+                        
+                        Image(systemName: "heart.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.red)
+                            .padding(.trailing)
+                        
                     }.padding(.top)
                     
                     Text("Description")
                         .font(.headline)
                         .bold()
                         .padding(3)
-                    Text(networking.self.formatText(word: self.networking.detail))
+                    Text(formatText(word: self.networking.detail))
                         .font(.caption)
                         .padding(3)
                 }

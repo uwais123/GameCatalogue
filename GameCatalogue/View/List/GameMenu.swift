@@ -38,7 +38,9 @@ struct GameMenu: View {
                             if page == 1 {
                                 Text("")
                             } else {
-                                Text("⬅️ Previous \(page - 1)").font(.footnote)
+                                Text("⬅️ Previous \(page - 1)")
+                                    .font(.footnote)
+                                    .foregroundColor(.black)
                             }
                             
                         }).padding(.leading)
@@ -50,7 +52,9 @@ struct GameMenu: View {
                             page += 1
                             self.networking.getGameData(page: page)
                         }, label: {
-                            Text("\(page + 1) Next ➡️").font(.footnote)
+                            Text("\(page + 1) Next ➡️")
+                                .font(.footnote)
+                                .foregroundColor(.black)
                         }).padding(.trailing)
                     }
                     LazyVGrid(columns: [
@@ -75,6 +79,7 @@ struct GameMenu: View {
                         Image(systemName: "person.crop.circle.fill")
                             .resizable()
                             .frame(width: 20, height: 20)
+                            .foregroundColor(.blue)
                     }
                 )
             }

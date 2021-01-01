@@ -20,7 +20,7 @@ struct Games: Codable {
 }
 
 
-struct Game: Codable, Identifiable {
+struct Game: Hashable ,Codable, Identifiable {
     let id: Int
     let name: String
     let released: String

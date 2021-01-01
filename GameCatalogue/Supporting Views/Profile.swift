@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Profile: View {
     
-    let userDefault = UserDefaults()
     @StateObject var profileVM = ProfileViewModel()
     
     var body: some View {
@@ -22,12 +21,21 @@ struct Profile: View {
                 .shadow(radius: 10)
             
             VStack(alignment: .center) {
-                Text(profileVM.name)
-                    .bold()
-                    .font(.title)
-                
-                Text(profileVM.email)
-                    .font(.footnote)
+                if profileVM.name == "" || profileVM.email == "" {
+                    Text("Uwais Alqadri")
+                        .bold()
+                        .font(.title)
+                    
+                    Text("uwaisalqadri654321@gmail.com")
+                        .font(.footnote)
+                } else {
+                    Text(profileVM.name)
+                        .bold()
+                        .font(.title)
+                    
+                    Text(profileVM.email)
+                        .font(.footnote)
+                }
                 
                 Button(action: {
                     profileVM.isEdit.toggle()

@@ -59,12 +59,6 @@ class Networking: ObservableObject {
             }
     }
     
-    func formatText(word: String) -> String {
-        let a = word.replacingOccurrences(of: "<[^>]+>", with: "", options: String.CompareOptions.regularExpression, range: nil)
-        let result = a.replacingOccurrences(of: "&[^;]+;", with: "", options: String.CompareOptions.regularExpression, range: nil)
-        return result
-    }
-    
 }
 
 struct Constants {
@@ -73,5 +67,11 @@ struct Constants {
     static var BASE_URL = "https://api.rawg.io/api/"
     static var API_KEY = "cb66c401448544e0a135f1d5757f685a"
     static var ENDPOINT = "games"
+}
+
+func formatText(word: String) -> String {
+    let a = word.replacingOccurrences(of: "<[^>]+>", with: "", options: String.CompareOptions.regularExpression, range: nil)
+    let result = a.replacingOccurrences(of: "&[^;]+;", with: "", options: String.CompareOptions.regularExpression, range: nil)
+    return result
 }
 
