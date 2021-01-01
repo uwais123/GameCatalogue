@@ -56,7 +56,7 @@ struct GameDetail: View {
                         
                         Spacer()
                         
-                        if !isFavorite {
+                        if isFavorite == false {
                             Button(action: {
                                 isFavorite = true
                                 let gameFav = GameFavorites(context: self.managedObjectContext)
@@ -80,7 +80,7 @@ struct GameDetail: View {
                                     .foregroundColor(.gray)
                                     .padding(.trailing)
                             })
-                        } else {
+                        } else if isFavorite == true {
                             Button(action: {
                                 // delete data
                             }, label: {
@@ -91,7 +91,6 @@ struct GameDetail: View {
                                     .padding(.trailing)
                             })
                         }
-                        
                         
                     }.padding(.top)
                     

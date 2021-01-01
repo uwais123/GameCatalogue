@@ -1,5 +1,5 @@
 //
-//  GameSearchedRow.swift
+//  GameSearchRow.swift
 //  GameCatalogue
 //
 //  Created by Uwais Alqadri on 20/12/20.
@@ -8,7 +8,7 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct GameSearchedRow: View {
+struct GameSearchRow: View {
     var game: Result
     var body: some View {
         VStack(alignment: .center, spacing: 4) {

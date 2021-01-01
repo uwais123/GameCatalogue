@@ -81,7 +81,7 @@ struct GameSearch: View {
                 ], alignment: .leading, spacing: 16, content: {
                     ForEach(networking.searchedGame) {item in
                         NavigationLink(destination: GameSearchDetail(game: item)) {
-                            GameSearchedRow(game: item)
+                            GameSearchRow(game: item)
                         }.buttonStyle(PlainButtonStyle())
                     }
                 }).padding(.horizontal, 12)
