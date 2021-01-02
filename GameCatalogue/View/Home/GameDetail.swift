@@ -61,12 +61,12 @@ struct GameDetail: View {
                                 isFavorite = true
                                 let gameFav = GameFavorites(context: self.managedObjectContext)
                                 gameFav.id = UUID()
-                                gameFav.idGame = Int32(self.game.id)
-                                gameFav.name = String(self.game.name)
-                                gameFav.image = String(self.game.image)
-                                gameFav.released = String(self.game.released)
-                                gameFav.rating = Double(self.game.rating)
-                                gameFav.playtime = Int32(self.game.playtime)
+                                gameFav.idGame = Int32(game.id)
+                                gameFav.name = String(game.name)
+                                gameFav.image = String(game.image)
+                                gameFav.released = String(game.released)
+                                gameFav.rating = Double(game.rating)
+                                gameFav.playtime = Int32(game.playtime)
                                 
                                 do {
                                     try self.managedObjectContext.save()
@@ -81,15 +81,15 @@ struct GameDetail: View {
                                     .padding(.trailing)
                             })
                         } else if isFavorite == true {
-                            Button(action: {
-                                // delete data
-                            }, label: {
+                            Button(action: {}, label: {
                                 Image(systemName: "heart.circle.fill")
                                     .resizable()
                                     .frame(width: 30, height: 30)
                                     .foregroundColor(.red)
                                     .padding(.trailing)
-                            })
+                            }).alert(isPresented: $isFavorite) {
+                                Alert(title: Text("Game Added!"), message: Text("Your game has been added to your favorites list"), dismissButton: .default(Text("Got it!")))
+                            }
                         }
                         
                     }.padding(.top)
