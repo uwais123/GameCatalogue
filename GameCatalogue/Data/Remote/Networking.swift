@@ -74,4 +74,3 @@ func formatText(word: String) -> String {
     let result = a.replacingOccurrences(of: "&[^;]+;", with: "", options: String.CompareOptions.regularExpression, range: nil)
     return result
 }
-

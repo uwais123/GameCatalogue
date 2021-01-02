@@ -15,15 +15,10 @@ struct GameFavorite: View {
     
     var body: some View {
         NavigationView {
-            ScrollView {
+            List {
                 ForEach(favGame, id: \.id) { item in
-                    NavigationLink(destination: Text("Ok")) {
+                    NavigationLink(destination: GameFavoriteDetail(game: item)) {
                         GameFavoritesRow(game: item)
-                            .padding()
-                            .background(Color.white)
-                            .compositingGroup()
-                            .shadow(radius: 5)
-                            .cornerRadius(14)
                         
                     }.buttonStyle(PlainButtonStyle())
                 }.onDelete{ indexSet in
@@ -43,7 +38,7 @@ struct GameFavorite: View {
             
             .navigationTitle("Favorites")
             .navigationBarItems(trailing: EditButton())
-        }
+        }.background(Color.white)
     }
 }
 

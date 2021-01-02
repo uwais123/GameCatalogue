@@ -40,7 +40,7 @@ struct GameMenu: View {
                             } else {
                                 Text("⬅️ Previous \(page - 1)")
                                     .font(.footnote)
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.secondary)
                             }
                             
                         }).padding(.leading)
@@ -54,7 +54,7 @@ struct GameMenu: View {
                         }, label: {
                             Text("\(page + 1) Next ➡️")
                                 .font(.footnote)
-                                .foregroundColor(.black)
+                                .foregroundColor(.secondary)
                         }).padding(.trailing)
                     }
                     LazyVGrid(columns: [

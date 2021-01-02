@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52068FF325A065BC001E84C2 /* GameFavoriteDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52068FF225A065BB001E84C2 /* GameFavoriteDetail.swift */; };
 		5214B1DA258BA5E300040335 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5214B1D9258BA5E300040335 /* Game.swift */; };
 		5214B1E6258BAD6600040335 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5214B1E5258BAD6600040335 /* SDWebImageSwiftUI */; };
 		5214B1EA258BB32500040335 /* GameRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5214B1E9258BB32500040335 /* GameRow.swift */; };
@@ -18,8 +19,6 @@
 		529AF9C5258A384E00255BD8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 529AF9C4258A384E00255BD8 /* Assets.xcassets */; };
 		529AF9C8258A384E00255BD8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 529AF9C7258A384E00255BD8 /* Preview Assets.xcassets */; };
 		529AF9D5258A409F00255BD8 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529AF9D4258A409F00255BD8 /* Networking.swift */; };
-		52AC55E62599693400FD48D2 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 52AC55E52599693400FD48D2 /* Realm */; };
-		52AC55E82599693400FD48D2 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 52AC55E72599693400FD48D2 /* RealmSwift */; };
 		52AC55EB2599869C00FD48D2 /* GameFavoritesRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AC55EA2599869C00FD48D2 /* GameFavoritesRow.swift */; };
 		52BE2814259078C7005D8F1A /* GameDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BE2813259078C7005D8F1A /* GameDetail.swift */; };
 		52BE28172590A4E3005D8F1A /* GameSearchDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52BE28162590A4E3005D8F1A /* GameSearchDetail.swift */; };
@@ -32,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		52068FF225A065BB001E84C2 /* GameFavoriteDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameFavoriteDetail.swift; sourceTree = "<group>"; };
 		5214B1D9258BA5E300040335 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		5214B1E9258BB32500040335 /* GameRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameRow.swift; sourceTree = "<group>"; };
 		523C2DE3259866CE004E597D /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
@@ -59,8 +59,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				52AC55E82599693400FD48D2 /* RealmSwift in Frameworks */,
-				52AC55E62599693400FD48D2 /* Realm in Frameworks */,
 				5214B1E6258BAD6600040335 /* SDWebImageSwiftUI in Frameworks */,
 				528EDF0B258D239E0084A21D /* Alamofire in Frameworks */,
 			);
@@ -184,6 +182,7 @@
 			children = (
 				52AC55EA2599869C00FD48D2 /* GameFavoritesRow.swift */,
 				52E0C4DE259EC4AA00073156 /* GameFavorite.swift */,
+				52068FF225A065BB001E84C2 /* GameFavoriteDetail.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -218,8 +217,6 @@
 			packageProductDependencies = (
 				5214B1E5258BAD6600040335 /* SDWebImageSwiftUI */,
 				528EDF0A258D239E0084A21D /* Alamofire */,
-				52AC55E52599693400FD48D2 /* Realm */,
-				52AC55E72599693400FD48D2 /* RealmSwift */,
 			);
 			productName = GameCatalogue;
 			productReference = 529AF9BD258A384D00255BD8 /* GameCatalogue.app */;
@@ -251,7 +248,6 @@
 			packageReferences = (
 				5214B1E4258BAD6600040335 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				528EDF09258D239E0084A21D /* XCRemoteSwiftPackageReference "Alamofire" */,
-				52AC55E42599693400FD48D2 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 			);
 			productRefGroup = 529AF9BE258A384D00255BD8 /* Products */;
 			projectDirPath = "";
@@ -279,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52068FF325A065BC001E84C2 /* GameFavoriteDetail.swift in Sources */,
 				52AC55EB2599869C00FD48D2 /* GameFavoritesRow.swift in Sources */,
 				52E0C4DF259EC4AA00073156 /* GameFavorite.swift in Sources */,
 				52E0C4F7259F521700073156 /* ContentView.swift in Sources */,
@@ -501,14 +498,6 @@
 				minimumVersion = 5.4.0;
 			};
 		};
-		52AC55E42599693400FD48D2 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-cocoa.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.5.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -521,16 +510,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 528EDF09258D239E0084A21D /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
-		};
-		52AC55E52599693400FD48D2 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 52AC55E42599693400FD48D2 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = Realm;
-		};
-		52AC55E72599693400FD48D2 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 52AC55E42599693400FD48D2 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
-			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 

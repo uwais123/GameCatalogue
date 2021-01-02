@@ -59,20 +59,13 @@ struct GameDetail: View {
                         if isFavorite == false {
                             Button(action: {
                                 isFavorite = true
-                                let gameFav = GameFavorites(context: self.managedObjectContext)
-                                gameFav.id = UUID()
-                                gameFav.idGame = Int32(game.id)
-                                gameFav.name = String(game.name)
-                                gameFav.image = String(game.image)
-                                gameFav.released = String(game.released)
-                                gameFav.rating = Double(game.rating)
-                                gameFav.playtime = Int32(game.playtime)
-                                
-                                do {
-                                    try self.managedObjectContext.save()
-                                } catch {
-                                    print(error)
-                                }
+                                addGame(
+                                    idGame: Int32(game.id),
+                                    name: String(game.name),
+                                    image: String(game.image),
+                                    released: String(game.released),
+                                    rating: Double(game.rating),
+                                    playtime: Int32(game.playtime))
                             }, label: {
                                 Image(systemName: "heart.circle.fill")
                                     .resizable()
@@ -111,4 +104,21 @@ struct GameDetail: View {
             networking.self.getGameDetail(idGame: game.id)
         }
     }
+    
+    func addGame(idGame: Int32, name: String, image: String, released: String, rating: Double, playtime: Int32) {
+        let gameFav = GameFavorites(context: self.managedObjectContext)
+        gameFav.idGame = idGame
+        gameFav.name = name
+        gameFav.image = image
+        gameFav.released = released
+        gameFav.rating = rating
+        gameFav.playtime = playtime
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print(error)
+        }
+    }
+    
 }

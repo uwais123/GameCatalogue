@@ -7,13 +7,14 @@
 
 import SwiftUI
 import SDWebImageSwiftUI
-import RealmSwift
 
 struct GameSearchDetail: View {
     
     @ObservedObject var networking = Networking()
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(entity: GameFavorites.entity(), sortDescriptors: []) var favorites: FetchedResults<GameFavorites>
+    @State var isFavorite = false
     var game: Result
-    let realm = try! Realm()
     
     var body: some View {
         ScrollView {
@@ -55,11 +56,34 @@ struct GameSearchDetail: View {
                         
                         Spacer()
                         
-                        Image(systemName: "heart.circle.fill")
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.red)
-                            .padding(.trailing)
+                        if !isFavorite {
+                            Button(action: {
+                                isFavorite = true
+                                addGame(
+                                    idGame: Int32(game.gameId!),
+                                    name: String(game.name!),
+                                    image: String(game.backgroundImage!),
+                                    released: String(game.released!),
+                                    rating: Double(game.rating!),
+                                    playtime: Int32(game.playtime!))
+                            }, label: {
+                                Image(systemName: "heart.circle.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.gray)
+                                    .padding(.trailing)
+                            })
+                        } else if isFavorite {
+                            Button(action: {}, label: {
+                                Image(systemName: "heart.circle.fill")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.red)
+                                    .padding(.trailing)
+                            }).alert(isPresented: $isFavorite) {
+                                Alert(title: Text("Game Added!"), message: Text("Your game has been added to your favorites list"), dismissButton: .default(Text("Got it!")))
+                            }
+                        }
                         
                     }.padding(.top)
                     
@@ -75,6 +99,22 @@ struct GameSearchDetail: View {
             .padding(.horizontal)
         }.onAppear {
             networking.self.getGameDetail(idGame: game.gameId ?? 0)
+        }
+    }
+    
+    func addGame(idGame: Int32, name: String, image: String, released: String, rating: Double, playtime: Int32) {
+        let gameFav = GameFavorites(context: self.managedObjectContext)
+        gameFav.idGame = idGame
+        gameFav.name = name
+        gameFav.image = image
+        gameFav.released = released
+        gameFav.rating = rating
+        gameFav.playtime = playtime
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print(error)
         }
     }
     

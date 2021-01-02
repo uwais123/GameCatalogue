@@ -130,8 +130,6 @@ struct EditProfile: View {
                 }
             )
         }
-        
-        
     }
 }
 

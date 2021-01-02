@@ -63,10 +63,3 @@ struct BlurView : UIViewRepresentable {
     }
     
 }
-
-//struct ProgressView_Previews: PreviewProvider {
-//    @State var showProgress = false
-//    static var previews: some View {
-//        ProgressView(placeHolder: "Load Data", show: $showProgress)
-//    }
-//}

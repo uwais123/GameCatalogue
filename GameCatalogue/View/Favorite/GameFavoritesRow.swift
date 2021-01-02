@@ -23,13 +23,13 @@ struct GameFavoritesRow: View {
                 Text(game.name ?? "Unknown")
                     .lineLimit(2)
                     .font(.system(size: 14, weight: .semibold))
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
                     .padding(.top, 11)
                 
                 Text(game.released ?? "Unknown")
                     .lineLimit(1)
                     .font(.system(size: 10, weight: .medium))
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
                 
                 HStack(alignment: .center, spacing: 4) {
                     Image(systemName: "star.fill")
@@ -47,14 +47,6 @@ struct GameFavoritesRow: View {
             
             Spacer()
         }
-//        .frame(width: 331, height: 127)
         
     }
 }
-
-//struct GameFavoritesRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GameFavoritesRow()
-//            .previewLayout(.sizeThatFits)
-//    }
-//}

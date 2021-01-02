@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import RealmSwift
 
 
 struct Games: Codable {
@@ -40,13 +39,13 @@ struct Game: Hashable ,Codable, Identifiable {
 }
 
 struct GameGenres: Codable {
-
+    
     let id: Int
     let name: String
     let slug: String
     let gamesCount: Int
     let imageBackground: String
-
+    
     private enum CodingKeys: String, CodingKey {
         case id = "id"
         case name = "name"
@@ -91,26 +90,3 @@ struct Result: Codable, Identifiable {
         
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
