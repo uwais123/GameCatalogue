@@ -19,7 +19,7 @@ struct GameSearchDetail: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                WebImage(url: URL(string: game.backgroundImage ?? "https://nostrahomes.com.au/uploads/cms/unknown.jpg"), options: .highPriority, context: nil)
+                WebImage(url: URL(string: game.backgroundImage ?? Constants.PLACEHOLDER), options: .highPriority, context: nil)
                     .resizable()
                     .frame(height: 200, alignment: .center)
                     .cornerRadius(9)
@@ -62,7 +62,7 @@ struct GameSearchDetail: View {
                                 addGame(
                                     idGame: Int32(game.gameId!),
                                     name: String(game.name!),
-                                    image: String(game.backgroundImage!),
+                                    image: String(game.backgroundImage ?? Constants.PLACEHOLDER),
                                     released: String(game.released!),
                                     rating: Double(game.rating!),
                                     playtime: Int32(game.playtime!))

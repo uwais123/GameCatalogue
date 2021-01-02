@@ -79,7 +79,7 @@ struct GameMenu: View {
                         Image(systemName: "person.crop.circle.fill")
                             .resizable()
                             .frame(width: 20, height: 20)
-                            .foregroundColor(.blue)
+                            .foregroundColor(.gray)
                     }
                 )
             }

@@ -18,7 +18,7 @@ struct GameFavoriteDetail: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                WebImage(url: URL(string: game.image ?? "https://nostrahomes.com.au/uploads/cms/unknown.jpg"), options: .highPriority, context: nil)
+                WebImage(url: URL(string: game.image ?? Constants.PLACEHOLDER), options: .highPriority, context: nil)
                     .resizable()
                     .frame(height: 200, alignment: .center)
                     .cornerRadius(9)

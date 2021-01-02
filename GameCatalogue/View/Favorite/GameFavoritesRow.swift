@@ -14,7 +14,7 @@ struct GameFavoritesRow: View {
     
     var body: some View {
         HStack {
-            WebImage(url: URL(string: game.image ?? "https://nostrahomes.com.au/uploads/cms/unknown.jpg"), options: .highPriority, context: nil)
+            WebImage(url: URL(string: game.image ?? Constants.PLACEHOLDER), options: .highPriority, context: nil)
                 .resizable()
                 .frame(width: 103, height: 103, alignment: .center)
                 .cornerRadius(14)

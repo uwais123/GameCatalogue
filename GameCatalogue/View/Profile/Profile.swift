@@ -49,10 +49,10 @@ struct Profile: View {
                     EditProfile(profileVM: profileVM)
                 })
             }.onAppear {
-                guard let getName = UserDefaults.standard.value(forKey: "Name") else { return }
-                self.profileVM.name = getName as! String
-                guard let getEmail = UserDefaults.standard.value(forKey: "Email") else { return }
-                self.profileVM.email = getEmail as! String
+                guard let getName = UserDefaults.standard.value(forKey: "Name") as? String else { return }
+                self.profileVM.name = getName
+                guard let getEmail = UserDefaults.standard.value(forKey: "Email") as? String else { return }
+                self.profileVM.email = getEmail
             }
         }
     }
@@ -131,12 +131,5 @@ struct EditProfile: View {
             )
         }
     }
-}
-
-class ProfileViewModel: ObservableObject {
-    @Published var name = ""
-    @Published var email: String = ""
-    
-    @Published var isEdit = false
 }
 

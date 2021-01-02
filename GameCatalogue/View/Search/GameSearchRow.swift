@@ -15,7 +15,7 @@ struct GameSearchRow: View {
             
             ZStack(alignment: .bottomTrailing) {
                 
-                WebImage(url: URL(string: game.backgroundImage ?? "https://nostrahomes.com.au/uploads/cms/unknown.jpg"), options: .highPriority, context: nil)
+                WebImage(url: URL(string: game.backgroundImage ?? Constants.PLACEHOLDER), options: .highPriority, context: nil)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .clipped()

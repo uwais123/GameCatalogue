@@ -12,7 +12,6 @@ class Networking: ObservableObject {
     @Published var games = [Game]()
     @Published var searchedGame = [Result]()
     @Published var detail = String()
-//    @Published var genres = String()
     
     func getGameData(page: Int) {
         AF.request("\(Constants.BASE_URL)\(Constants.ENDPOINT)?page=\(page)")
@@ -36,17 +35,6 @@ class Networking: ObservableObject {
             }
     }
     
-//    func getGameGenres(idGame: Int) {
-//        AF.request("\(Constants.BASE_URL)\(Constants.ENDPOINT)/\(String(idGame))")
-//            .validate()
-//            .responseDecodable(of: GameGenres.self, queue: DispatchQueue(label: "getGenres", qos: .userInteractive, attributes: .concurrent)) { response in
-//                guard let gameGenres = response.value else { return }
-//                DispatchQueue.main.async {
-//                    self.genres = gameGenres.name
-//                }
-//            }
-//
-//    }
     
     func getSearchData(query: String) {
         AF.request("\(Constants.BASE_URL)\(Constants.ENDPOINT)?search=\(query)")
@@ -67,6 +55,7 @@ struct Constants {
     static var BASE_URL = "https://api.rawg.io/api/"
     static var API_KEY = "cb66c401448544e0a135f1d5757f685a"
     static var ENDPOINT = "games"
+    static var PLACEHOLDER = "https://nostrahomes.com.au/uploads/cms/unknown.jpg"
 }
 
 func formatText(word: String) -> String {
