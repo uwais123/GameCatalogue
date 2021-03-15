@@ -37,13 +37,7 @@ class DetailPresenter: ObservableObject {
                 }
             }, receiveValue: { detailGame in
                 print(detailGame.id)
-                self.detailGame.id = detailGame.id
-                self.detailGame.name = detailGame.name
-                self.detailGame.description = detailGame.description
-                self.detailGame.released = detailGame.released
-                self.detailGame.image = detailGame.image
-                self.detailGame.rating = detailGame.rating
-                self.detailGame.playtime = detailGame.playtime
+                self.detailGame = detailGame
             })
             .store(in: &cancellables)
     }

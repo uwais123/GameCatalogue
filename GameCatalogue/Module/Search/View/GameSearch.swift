@@ -84,9 +84,9 @@ struct GameSearch: View {
                         GridItem(.adaptive(minimum: 120), spacing: 20, alignment: .center)
                     ], alignment: .leading, spacing: 16, content: {
                         ForEach(self.presenter.searchResults) { item in
-//                            NavigationLink(destination: GameDetail()) {
-//                                GameSearchRow(game: item)
-//                            }.buttonStyle(PlainButtonStyle())
+                            self.presenter.linkToDetail(for: item.id) {
+                                GameSearchRow(game: item)
+                            }.buttonStyle(PlainButtonStyle())
                         }
                     }).padding(.horizontal, 12)
                 }

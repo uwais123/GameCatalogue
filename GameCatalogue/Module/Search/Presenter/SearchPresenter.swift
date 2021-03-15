@@ -7,9 +7,11 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class SearchPresenter: ObservableObject {
     
+    private let router = SearchRouter()
     private let searchUseCase: SearchUseCase
     private var cancellables: Set<AnyCancellable> = []
     
@@ -38,4 +40,14 @@ class SearchPresenter: ObservableObject {
             })
             .store(in: &cancellables)
     }
+    
+    func linkToDetail<Content: View>(
+        for idGame: Int,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        NavigationLink(
+            destination: router.makeDetailView(for: idGame)
+        ) { content() }
+    }
+    
 }
