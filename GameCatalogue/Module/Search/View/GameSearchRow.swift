@@ -10,14 +10,14 @@ import SDWebImageSwiftUI
 
 struct GameSearchRow: View {
     
-    var game: Result
+    var game: Game
     
     var body: some View {
         VStack(alignment: .center, spacing: 4) {
             
             ZStack(alignment: .bottomTrailing) {
                 
-                WebImage(url: URL(string: game.backgroundImage ?? Constants.placeHolder), options: .highPriority, context: nil)
+                WebImage(url: URL(string: game.image), options: .highPriority, context: nil)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .clipped()
@@ -28,7 +28,7 @@ struct GameSearchRow: View {
                     Image(systemName: "star.fill")
                         .resizable()
                         .frame(width: 12, height: 12)
-                    Text(String(game.rating ?? 0.0))
+                    Text(String(game.rating ))
                         .font(.footnote)
                         .foregroundColor(.black)
                 }
@@ -39,13 +39,13 @@ struct GameSearchRow: View {
                 .padding(10)
             }
             
-            Text(game.name ?? "Unknown")
+            Text(game.name)
                 .lineLimit(2)
                 .font(.system(size: 14, weight: .semibold))
                 .multilineTextAlignment(.center)
                 .padding(.top, 11)
             
-            Text(game.released ?? "Unknown")
+            Text(game.released)
                 .lineLimit(1)
                 .font(.system(size: 10, weight: .medium))
                 .multilineTextAlignment(.center)

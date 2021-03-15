@@ -13,7 +13,7 @@ class SearchPresenter: ObservableObject {
     private let searchUseCase: SearchUseCase
     private var cancellables: Set<AnyCancellable> = []
     
-    @Published var searchResults: [Result] = []
+    @Published var searchResults: [Game] = []
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
     

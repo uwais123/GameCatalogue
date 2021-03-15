@@ -19,7 +19,7 @@ struct GameView: View {
                     ProgressView(placeHolder: "Load Data..", show: true, animate: true)
                 } else {
                     ScrollView {
-                        self.presenter.linkBuilder() {
+                        self.presenter.linkToSearch() {
                             SearchButton()
                                 .padding(.top)
                                 .padding(.bottom)
@@ -55,10 +55,11 @@ struct GameView: View {
                             GridItem(.adaptive(minimum: 120), spacing: 20, alignment: .center)
                         ], alignment: .leading, spacing: 16, content: {
                             ForEach(self.presenter.games) { item in
-                                NavigationLink(destination: GameDetail()) {
+                                
+                                self.presenter.linkToDetail() {
                                     GameRow(game: item)
-                                    
                                 }.buttonStyle(PlainButtonStyle())
+                                
                             }
                         }).padding(.horizontal, 12)
                     }

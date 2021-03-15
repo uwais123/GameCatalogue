@@ -41,11 +41,19 @@ class HomePresenter: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func linkBuilder<Content: View>(
+    func linkToSearch<Content: View>(
         @ViewBuilder content: () -> Content
     ) -> some View {
         NavigationLink(
             destination: router.makeSearchView()
+        ) { content() }
+    }
+    
+    func linkToDetail<Content: View>(
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        NavigationLink(
+            destination: router.makeDetailView()
         ) { content() }
     }
     

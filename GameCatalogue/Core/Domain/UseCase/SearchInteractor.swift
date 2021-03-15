@@ -9,7 +9,7 @@ import Combine
 
 
 protocol SearchUseCase {
-    func getSearch(query: String) -> AnyPublisher<[Result], Error>
+    func getSearch(query: String) -> AnyPublisher<[Game], Error>
 }
 
 class SearchInteractor: SearchUseCase {
@@ -20,7 +20,7 @@ class SearchInteractor: SearchUseCase {
         self.repository = repository
     }
     
-    func getSearch(query: String) -> AnyPublisher<[Result], Error> {
+    func getSearch(query: String) -> AnyPublisher<[Game], Error> {
         return repository.getSearch(query: query)
     }
 }

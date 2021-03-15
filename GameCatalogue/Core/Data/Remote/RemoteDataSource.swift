@@ -13,7 +13,9 @@ protocol RemoteDataSourceProtocol: class {
     
     func getGames(page: Int) -> AnyPublisher<[GameResponse], Error>
     
-    func getSearch(query: String) -> AnyPublisher<[ResultResponse], Error>
+    func getSearch(query: String) -> AnyPublisher<[GameResponse], Error>
+    
+    func getDetail(idGame: Int) -> AnyPublisher<DetailGameResponse, Error>
 }
 
 final class RemoteDataSouce: NSObject {
@@ -25,15 +27,33 @@ final class RemoteDataSouce: NSObject {
 
 extension RemoteDataSouce: RemoteDataSourceProtocol {
     
-    func getSearch(query: String) -> AnyPublisher<[ResultResponse], Error> {
-        return Future<[ResultResponse], Error> { completion in
+    func getDetail(idGame: Int) -> AnyPublisher<DetailGameResponse, Error> {
+        return Future<DetailGameResponse, Error> { completion in
+            if let url = URL(string: Endpoints.Gets.detail.url + String(idGame)) {
+                AF.request(url)
+                    .validate()
+                    .responseDecodable(of: DetailGameResponse.self) { response in
+                        switch response.result {
+                        case .success:
+                            completion(.success(response.value ?? DetailGameResponse(id: 0, name: "Unknown", description: "Unknown", released: "Unknown", image: Constants.placeHolder, rating: 0.0, playtime: 0)))
+                        case .failure:
+                            completion(.failure(URLError.invalidResponse))
+                        }
+                    }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+        
+    func getSearch(query: String) -> AnyPublisher<[GameResponse], Error> {
+        return Future<[GameResponse], Error> { completion in
             if let url = URL(string: Endpoints.Gets.search.url + query) {
                 AF.request(url)
                     .validate()
-                    .responseDecodable(of: SearchResponse.self) { response in
+                    .responseDecodable(of: GamesResponse.self) { response in
                         switch response.result {
                         case .success(let value):
-                            completion(.success(value.results))
+                            completion(.success(value.games))
                         case .failure:
                             completion(.failure(URLError.invalidResponse))
                         }

@@ -10,25 +10,26 @@ import SDWebImageSwiftUI
 
 struct GameDetail: View {
     
+    @ObservedObject var presenter: DetailPresenter
     @State var isFavorite = false
     
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
-                WebImage(url: URL(string: Constants.placeHolder), options: .highPriority, context: nil)
+                WebImage(url: URL(string: self.presenter.detailGame.image), options: .highPriority, context: nil)
                     .resizable()
                     .frame(height: 200, alignment: .center)
                     .cornerRadius(9)
                 
                 VStack(alignment: .leading) {
-                    Text("wndiobnd")
+                    Text(self.presenter.detailGame.name )
                         .font(.title2)
                         .bold()
-                    Text("Average Playtime: \(String(20)) Hours")
+                    Text("Average Playtime: \(String(self.presenter.detailGame.playtime )) Hours")
                         .font(.subheadline)
                     
                     HStack {
-                        Text("dnwidni")
+                        Text(self.presenter.detailGame.released )
                             .font(.footnote)
                             .bold()
                             .foregroundColor(.black)
@@ -82,7 +83,7 @@ struct GameDetail: View {
                         .bold()
                         .padding(3)
                     
-                    Text("Detaik".formatText())
+                    Text(self.presenter.detailGame.description)
                         .font(.caption)
                         .padding(3)
                         .padding(.bottom)
@@ -91,7 +92,7 @@ struct GameDetail: View {
             .padding(.horizontal)
         }
         .onAppear {
-            // get detail data
+            self.presenter.getDetail(idGame: 3070)
         }
         .navigationTitle("Detail")
     }

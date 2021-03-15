@@ -74,8 +74,9 @@ struct GameSearch: View {
             }
             // MARK: end textfield
             
+            Spacer(minLength: 60)
+            
             if getSearchData == true {
-                Spacer(minLength: 60)
                 if self.presenter.loadingState {
                     ProgressView(placeHolder: "Searching...", show: true, animate: true)
                 } else {
@@ -83,15 +84,14 @@ struct GameSearch: View {
                         GridItem(.adaptive(minimum: 120), spacing: 20, alignment: .center)
                     ], alignment: .leading, spacing: 16, content: {
                         ForEach(self.presenter.searchResults) { item in
-                            NavigationLink(destination: GameDetail()) {
-                                GameSearchRow(game: item)
-                            }.buttonStyle(PlainButtonStyle())
+//                            NavigationLink(destination: GameDetail()) {
+//                                GameSearchRow(game: item)
+//                            }.buttonStyle(PlainButtonStyle())
                         }
                     }).padding(.horizontal, 12)
                 }
                 
-            } else if getSearchData == false {
-                Spacer()
+            } else if getSearchData == false { // MARK: -- need to replace with lottie
                 VStack {
                     Image(systemName: "magnifyingglass")
                         .resizable()

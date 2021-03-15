@@ -12,7 +12,9 @@ protocol GameRepositoryProtocol {
     
     func getGames(page: Int) -> AnyPublisher<[Game], Error>
     
-    func getSearch(query: String) -> AnyPublisher<[Result], Error>
+    func getSearch(query: String) -> AnyPublisher<[Game], Error>
+    
+    func getDetail(idGame: Int) -> AnyPublisher<DetailGame, Error>
 }
 
 final class GameRepository: NSObject {
@@ -33,10 +35,16 @@ final class GameRepository: NSObject {
 }
 
 extension GameRepository: GameRepositoryProtocol {
+    func getDetail(idGame: Int) -> AnyPublisher<DetailGame, Error> {
+        return self.remote.getDetail(idGame: idGame)
+            .map { DetailGameMapper.mapDetailResponseToDomain(input: $0) }
+            .eraseToAnyPublisher()
+    }
     
-    func getSearch(query: String) -> AnyPublisher<[Result], Error> {
+    
+    func getSearch(query: String) -> AnyPublisher<[Game], Error> {
         return self.remote.getSearch(query: query)
-            .map { SearchMapper.mapSearchResponseToDomain(input: $0) }
+            .map { GameMapper.mapGameResponseToDomain(input: $0) }
             .eraseToAnyPublisher()
     }
     
