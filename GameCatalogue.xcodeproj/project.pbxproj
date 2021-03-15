@@ -37,6 +37,7 @@
 		528BB33F25FFBC8A0093A93F /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528BB33E25FFBC8A0093A93F /* DetailInteractor.swift */; };
 		528BB34325FFBDCF0093A93F /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528BB34225FFBDCF0093A93F /* DetailPresenter.swift */; };
 		528BB34725FFC86E0093A93F /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528BB34625FFC86E0093A93F /* SearchRouter.swift */; };
+		528BB34B25FFD00D0093A93F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 528BB34A25FFD00D0093A93F /* .swiftlint.yml */; };
 		528EDF0B258D239E0084A21D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 528EDF0A258D239E0084A21D /* Alamofire */; };
 		529AF9C1258A384D00255BD8 /* GameCatalogueApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529AF9C0258A384D00255BD8 /* GameCatalogueApp.swift */; };
 		529AF9C3258A384D00255BD8 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529AF9C2258A384D00255BD8 /* GameView.swift */; };
@@ -78,6 +79,7 @@
 		528BB33E25FFBC8A0093A93F /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		528BB34225FFBDCF0093A93F /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
 		528BB34625FFC86E0093A93F /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
+		528BB34A25FFD00D0093A93F /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		529AF9BD258A384D00255BD8 /* GameCatalogue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameCatalogue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		529AF9C0258A384D00255BD8 /* GameCatalogueApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCatalogueApp.swift; sourceTree = "<group>"; };
 		529AF9C2258A384D00255BD8 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
@@ -333,6 +335,7 @@
 		529AF9B4258A384D00255BD8 = {
 			isa = PBXGroup;
 			children = (
+				528BB34A25FFD00D0093A93F /* .swiftlint.yml */,
 				529AF9BF258A384D00255BD8 /* GameCatalogue */,
 				529AF9BE258A384D00255BD8 /* Products */,
 			);
@@ -492,6 +495,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				528BB34B25FFD00D0093A93F /* .swiftlint.yml in Resources */,
 				529AF9C8258A384E00255BD8 /* Preview Assets.xcassets in Resources */,
 				529AF9C5258A384E00255BD8 /* Assets.xcassets in Resources */,
 			);

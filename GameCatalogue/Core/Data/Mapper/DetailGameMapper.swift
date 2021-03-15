@@ -22,20 +22,4 @@ final class DetailGameMapper {
             rating: detailGameResponse.rating,
             playtime: detailGameResponse.playtime)
     }
-    
-//    static func mapGameEntityToDomain(
-//        input gameEntity: [GameEntity]
-//    ) -> [Game] {
-//
-//        return gameEntity.map { result in
-//            return Game(
-//                id: result.id,
-//                name: result.name,
-//                released: result.released,
-//                image: result.image,
-//                rating: result.rating,
-//                playtime: result.playtime
-//            )
-//        }
-//    }
 }
