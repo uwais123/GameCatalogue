@@ -10,6 +10,7 @@ import Combine
 protocol HomeUseCase {
     
     func getGames(page: Int) -> AnyPublisher<[Game], Error>
+    
 }
 
 class HomeInteractor: HomeUseCase {

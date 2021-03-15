@@ -10,7 +10,7 @@ import SwiftUI
 struct ProgressView: View {
     
     var placeHolder: String
-    @Binding var show: Bool
+    @State var show = false
     @State var animate = false
     
     var body: some View {
@@ -30,7 +30,7 @@ struct ProgressView: View {
         .cornerRadius(20)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(
-            Color.primary.opacity(0.35)
+            Color.primary.opacity(0)
                 .onAppear {
                     withAnimation {
                         // closing view

@@ -35,7 +35,7 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
             if let realm = self.realm {
                 let games: Results<GameEntity> = {
                     realm.objects(GameEntity.self)
-                        .sorted(byKeyPath: "title", ascending: true)
+                        .sorted(byKeyPath: "name", ascending: true)
                 }()
                 completion(.success(games.toArray(ofType: GameEntity.self)))
             } else {

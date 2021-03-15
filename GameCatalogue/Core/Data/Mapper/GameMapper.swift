@@ -15,12 +15,12 @@ final class GameMapper {
         
         return gameResponse.map { result in
             return Game(
-                id: result.id,
-                name: result.name,
-                released: result.released,
-                image: result.image,
-                rating: result.rating,
-                playtime: result.playtime
+                id: result.id ?? 0,
+                name: result.name ?? "Unknown",
+                released: result.released ?? "Unknown",
+                image: result.image ?? Constants.placeHolder,
+                rating: result.rating ?? 0.0,
+                playtime: result.playtime ?? 0
             )
         }
     }
@@ -47,21 +47,13 @@ final class GameMapper {
         
         return gameResponse.map { response in
             let entity = GameEntity()
-            entity.id = response.id
-            entity.name = response.name
-            entity.released = response.released
-            entity.image = response.image
-            entity.rating = response.rating
-            entity.playtime = response.playtime
+            entity.id = response.id ?? 0
+            entity.name = response.name ?? "Unknown"
+            entity.released = response.released ?? "Unknown"
+            entity.image = response.image ?? Constants.placeHolder
+            entity.rating = response.rating ?? 0.0
+            entity.playtime = response.playtime ?? 0
             return entity
         }
     }
-    
-    
-//    @objc dynamic var id: Int = 0
-//    @objc dynamic var name: String = ""
-//    @objc dynamic var released: String = ""
-//    @objc dynamic var image: String = ""
-//    @objc dynamic var rating: Double = 0.0
-//    @objc dynamic var playtime: Int = 0
 }

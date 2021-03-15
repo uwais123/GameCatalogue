@@ -19,12 +19,12 @@ struct GamesResponse: Codable {
 
 
 struct GameResponse: Hashable ,Codable, Identifiable {
-    let id: Int
-    let name: String
-    let released: String
-    let image: String
-    let rating: Double
-    let playtime: Int
+    let id: Int?
+    let name: String?
+    let released: String?
+    let image: String?
+    let rating: Double?
+    let playtime: Int?
     
     enum CodingKeys: String, CodingKey {
         case id

@@ -9,7 +9,7 @@ import Foundation
 
 struct SearchResponse: Codable {
     
-    let results: [ResultResponse]?
+    let results: [ResultResponse]
     
     enum CodingKeys: String, CodingKey {
         case results

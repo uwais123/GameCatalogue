@@ -9,13 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @EnvironmentObject var homePresenter: HomePresenter
+    @EnvironmentObject var searchPresenter: SearchPresenter
+    
     init() {
         UITabBar.appearance().barTintColor = UIColor.black
     }
     
     var body: some View {
         TabView {
-            GameMenu()
+            GameView(presenter: homePresenter, searchPresenter: searchPresenter)
                 .tabItem {
                     Image(systemName: "tray.fill")
                     Text("Home")

@@ -7,16 +7,6 @@
 
 import Foundation
 
-struct PurpleData: Codable {
-    
-    let results: [Result]?
-    
-    enum CodingKeys: String, CodingKey {
-        case results
-        
-    }
-}
-
 struct Result: Codable, Identifiable {
     var id = UUID()
     let name: String?

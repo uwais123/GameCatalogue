@@ -11,6 +11,8 @@ import Combine
 protocol GameRepositoryProtocol {
     
     func getGames(page: Int) -> AnyPublisher<[Game], Error>
+    
+    func getSearch(query: String) -> AnyPublisher<[Result], Error>
 }
 
 final class GameRepository: NSObject {
@@ -32,23 +34,15 @@ final class GameRepository: NSObject {
 
 extension GameRepository: GameRepositoryProtocol {
     
+    func getSearch(query: String) -> AnyPublisher<[Result], Error> {
+        return self.remote.getSearch(query: query)
+            .map { SearchMapper.mapSearchResponseToDomain(input: $0) }
+            .eraseToAnyPublisher()
+    }
+    
     func getGames(page: Int) -> AnyPublisher<[Game], Error> {
-        return self.locale.getGames()
-            .flatMap { result -> AnyPublisher<[Game], Error> in
-                if result.isEmpty || result.count < 5 {
-                    return self.remote.getGames(page: page)
-                        .map { GameMapper.mapResponseToEntity(input: $0) }
-                        .flatMap { self.locale.addGames(from: $0) }
-                        .filter { $0 }
-                        .flatMap { _ in self.locale.getGames()
-                            .map { GameMapper.mapGameEntityToDomain(input: $0) }
-                        }
-                        .eraseToAnyPublisher()
-                } else {
-                    return self.locale.getGames()
-                        .map { GameMapper.mapGameEntityToDomain(input: $0) }
-                        .eraseToAnyPublisher()
-                }
-            }.eraseToAnyPublisher()
+        return self.remote.getGames(page: page)
+            .map { GameMapper.mapGameResponseToDomain(input: $0) }
+            .eraseToAnyPublisher()
     }
 }

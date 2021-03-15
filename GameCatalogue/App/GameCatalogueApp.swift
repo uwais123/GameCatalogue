@@ -15,7 +15,13 @@ struct GameCatalogueApp: App {
         WindowGroup {
             let homeUseCase = Injection.init().provideHome()
             let homePresenter = HomePresenter(homeUseCase: homeUseCase)
-            ContentView().environmentObject(homePresenter)
+            
+            let searchUseCase = Injection.init().provideSearch()
+            let searchPresenter = SearchPresenter(searchUseCase: searchUseCase)
+            
+            ContentView()
+                .environmentObject(homePresenter)
+                .environmentObject(searchPresenter)
         }
     }
 }

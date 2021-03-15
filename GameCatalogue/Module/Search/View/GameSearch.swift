@@ -10,6 +10,7 @@ import SwiftUI
 
 struct GameSearch: View {
     
+    @ObservedObject var presenter: SearchPresenter
     @Binding var query: String
     @Binding var isSearching: Bool
     @Binding var getSearchData: Bool
@@ -57,7 +58,7 @@ struct GameSearch: View {
                         isSearching = true
                         getSearchData = true
                         
-//                        self.networking.getSearchData(query: query)
+                        self.presenter.getSearch(query: self.query)
                         
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         
@@ -74,15 +75,21 @@ struct GameSearch: View {
             // MARK: end textfield
             
             if getSearchData == true {
-                LazyVGrid(columns: [
-                    GridItem(.adaptive(minimum: 50, maximum: 200), spacing: 16)
-                ], alignment: .leading, spacing: 16, content: {
-//                    ForEach() { item in
-//                        NavigationLink(destination: GameSearchDetail() {
-//                            GameSearchRow()
-//                        }.buttonStyle(PlainButtonStyle())
-//                    }
-                }).padding(.horizontal, 12)
+                
+                if self.presenter.loadingState {
+                    ProgressView(placeHolder: "Searching...", show: true, animate: true)
+                } else {
+                    LazyVGrid(columns: [
+                        GridItem(.adaptive(minimum: 120), spacing: 20, alignment: .center)
+                    ], alignment: .leading, spacing: 16, content: {
+                        ForEach(self.presenter.searchResults) { item in
+                            NavigationLink(destination: GameDetail()) {
+                                GameSearchRow(game: item)
+                            }.buttonStyle(PlainButtonStyle())
+                        }
+                    }).padding(.horizontal, 12)
+                }
+                
             } else if getSearchData == false {
                 Spacer()
                 VStack {
