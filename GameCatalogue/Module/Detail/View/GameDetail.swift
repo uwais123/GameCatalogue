@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 
 struct GameDetail: View {
     
+    let idGame: Int
     @ObservedObject var presenter: DetailPresenter
     @State var isFavorite = false
     
@@ -92,7 +93,7 @@ struct GameDetail: View {
             .padding(.horizontal)
         }
         .onAppear {
-            self.presenter.getDetail(idGame: 3070)
+            self.presenter.getDetail(idGame: idGame)
         }
         .navigationTitle("Detail")
     }

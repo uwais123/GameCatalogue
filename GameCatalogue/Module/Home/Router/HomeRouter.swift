@@ -15,9 +15,9 @@ class HomeRouter {
         return GameSearch(presenter: presenter)
     }
     
-    func makeDetailView() -> some View {
+    func makeDetailView(for idGame: Int) -> some View {
         let detailUseCase = Injection.init().provideDetail()
         let presenter = DetailPresenter(detailUseCase: detailUseCase)
-        return GameDetail(presenter: presenter)
+        return GameDetail(idGame: idGame,presenter: presenter)
     }
 }

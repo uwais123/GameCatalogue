@@ -55,8 +55,7 @@ struct GameView: View {
                             GridItem(.adaptive(minimum: 120), spacing: 20, alignment: .center)
                         ], alignment: .leading, spacing: 16, content: {
                             ForEach(self.presenter.games) { item in
-                                
-                                self.presenter.linkToDetail() {
+                                self.presenter.linkToDetail(for: item.id) {
                                     GameRow(game: item)
                                 }.buttonStyle(PlainButtonStyle())
                                 
