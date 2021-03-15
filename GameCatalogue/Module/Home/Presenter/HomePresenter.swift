@@ -7,10 +7,11 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class HomePresenter: ObservableObject {
     
-//    private let router = Home
+    private let router = HomeRouter()
     private let homeUseCase: HomeUseCase
     private var cancellables: Set<AnyCancellable> = []
     
@@ -35,8 +36,17 @@ class HomePresenter: ObservableObject {
                 }
             }, receiveValue: { games in
                 self.games = games
+                print(games)
             })
             .store(in: &cancellables)
+    }
+    
+    func linkBuilder<Content: View>(
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        NavigationLink(
+            destination: router.makeSearchView()
+        ) { content() }
     }
     
 }

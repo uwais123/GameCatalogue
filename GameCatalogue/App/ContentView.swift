@@ -10,7 +10,6 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var homePresenter: HomePresenter
-    @EnvironmentObject var searchPresenter: SearchPresenter
     
     init() {
         UITabBar.appearance().barTintColor = UIColor.black
@@ -18,19 +17,27 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            GameView(presenter: homePresenter, searchPresenter: searchPresenter)
+            GameView(presenter: homePresenter)
                 .tabItem {
-                    Image(systemName: "tray.fill")
-                    Text("Home")
+                    TabItem(imageName: "tray.fill", title: "Home")
                 }
             
             GameFavorite()
                 .tabItem {
-                    Image(systemName: "heart.fill")
-                        .padding()
-                    Text("Favorite")
+                    TabItem(imageName: "heart.fill", title: "Favorite")
                 }
         }.accentColor(.blue)
+    }
+}
+
+struct TabItem: View {
+    var imageName: String
+    var title: String
+    var body: some View {
+        VStack {
+            Image(systemName: imageName)
+            Text(title)
+        }
     }
 }
 

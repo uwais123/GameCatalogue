@@ -10,25 +10,16 @@ import SwiftUI
 struct GameView: View {
     
     @ObservedObject var presenter: HomePresenter
-    @ObservedObject var searchPresenter: SearchPresenter
     @State private var page = 1
-    @State var query = ""
-    @State var isSearching = false
-    @State var getSearchData = false
     
     var body: some View {
-        
-        ZStack {
-            NavigationView {
+        NavigationView {
+            VStack {
                 if presenter.loadingState {
-                    VStack {
-                        ProgressView(placeHolder: "Load Data..", show: true, animate: true)
-                    }
+                    ProgressView(placeHolder: "Load Data..", show: true, animate: true)
                 } else {
                     ScrollView {
-                        NavigationLink(
-                            destination: GameSearch(presenter: searchPresenter, query: $query, isSearching: $isSearching, getSearchData: $getSearchData)
-                        ) {
+                        self.presenter.linkBuilder() {
                             SearchButton()
                                 .padding(.top)
                                 .padding(.bottom)
@@ -71,24 +62,23 @@ struct GameView: View {
                             }
                         }).padding(.horizontal, 12)
                     }
-                    .navigationTitle("Games")
-                    .navigationBarItems(
-                        trailing: NavigationLink(
-                            destination: Profile()) {
-                            Image(systemName: "person.crop.circle.fill")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.gray)
-                        }
-                    )
                 }
             }
-            .onAppear {
-                self.presenter.getGames(page: page)
-            }
+            .navigationTitle("Games")
+            .navigationBarItems(
+                trailing: NavigationLink(
+                    destination: Profile()) {
+                    Image(systemName: "person.crop.circle.fill")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .foregroundColor(.gray)
+                }
+            )
+        }
+        .onAppear {
+            self.presenter.getGames(page: page)
         }
         .edgesIgnoringSafeArea(.all)
-        
     }
     
 }

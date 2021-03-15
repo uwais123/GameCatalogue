@@ -29,7 +29,7 @@ enum Endpoints {
         public var url: String {
             switch self {
             case .game: return "\(Constants.baseUrl)games?page="
-            case .search: return "\(Constants.baseUrl)game?search="
+            case .search: return "\(Constants.baseUrl)games?search="
             }
         }
     }

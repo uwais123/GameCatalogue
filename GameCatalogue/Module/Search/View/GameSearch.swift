@@ -11,9 +11,9 @@ import SwiftUI
 struct GameSearch: View {
     
     @ObservedObject var presenter: SearchPresenter
-    @Binding var query: String
-    @Binding var isSearching: Bool
-    @Binding var getSearchData: Bool
+    @State var query = ""
+    @State var isSearching = false
+    @State var getSearchData = false
     
     var body: some View {
         ScrollView {
@@ -75,7 +75,7 @@ struct GameSearch: View {
             // MARK: end textfield
             
             if getSearchData == true {
-                
+                Spacer(minLength: 60)
                 if self.presenter.loadingState {
                     ProgressView(placeHolder: "Searching...", show: true, animate: true)
                 } else {
@@ -111,5 +111,6 @@ struct GameSearch: View {
                 }
             }
         }
+        .navigationTitle("Search")
     }
 }

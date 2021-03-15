@@ -93,6 +93,7 @@ struct GameDetail: View {
         .onAppear {
             // get detail data
         }
+        .navigationTitle("Detail")
     }
     
 }

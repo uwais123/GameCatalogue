@@ -34,6 +34,7 @@ class SearchPresenter: ObservableObject {
                 }
             }, receiveValue: { searchResults in
                 self.searchResults = searchResults
+                print(searchResults)
             })
             .store(in: &cancellables)
     }
