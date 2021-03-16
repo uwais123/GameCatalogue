@@ -9,7 +9,9 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct GameFavoritesRow: View {
-        
+    
+    var game: Game
+    
     var body: some View {
         HStack {
             image
@@ -28,7 +30,7 @@ struct GameFavoritesRow: View {
 extension GameFavoritesRow {
     
     var image: some View {
-        WebImage(url: URL(string: Constants.placeHolder), options: .highPriority, context: nil)
+        WebImage(url: URL(string: game.image), options: .highPriority, context: nil)
             .resizable()
             .frame(width: 103, height: 103, alignment: .center)
             .cornerRadius(14)
@@ -37,7 +39,7 @@ extension GameFavoritesRow {
     }
     
     var title: some View {
-        Text("Unknown")
+        Text(game.name)
             .lineLimit(2)
             .font(.system(size: 14, weight: .semibold))
             .multilineTextAlignment(.leading)
@@ -45,7 +47,7 @@ extension GameFavoritesRow {
     }
     
     var released: some View {
-        Text("Unknown")
+        Text(game.released)
             .lineLimit(1)
             .font(.system(size: 10, weight: .medium))
             .multilineTextAlignment(.leading)
@@ -56,7 +58,7 @@ extension GameFavoritesRow {
             Image(systemName: "star.fill")
                 .resizable()
                 .frame(width: 12, height: 12)
-            Text(String(0.0))
+            Text(String(game.rating))
                 .font(.system(size: 10, weight: .medium))
             
         }
@@ -69,9 +71,10 @@ extension GameFavoritesRow {
 }
 
 
-struct GameFavoriteRow_Previews: PreviewProvider {
-    static var previews: some View {
-        GameFavoritesRow().previewLayout(.sizeThatFits)
-    }
-}
+//struct GameFavoriteRow_Previews: PreviewProvider {
+//    static var previews: some View {
+//        
+//        GameFavoritesRow(game: <#Game#>).previewLayout(.sizeThatFits)
+//    }
+//}
 

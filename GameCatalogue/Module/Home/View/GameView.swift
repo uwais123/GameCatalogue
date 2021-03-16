@@ -30,13 +30,13 @@ struct GameView: View {
                             ForEach(self.presenter.games.indices, id: \.self) { item in
                                 let game = presenter.games[item]
                                 self.presenter.linkToDetail(for: game.id) {
-                                    GameRow(game: game)
-                                        .onAppear {
-                                            if item == presenter.games.count - 1{
-                                                page += 1
-                                                presenter.getGames(page: page)
-                                            }
-                                        }
+                                    GameRow(game: game) // MARK: -- Implement paging
+//                                        .onAppear {
+//                                            if item == presenter.games.count - 1{
+//                                                page += 1
+//                                                presenter.getGames(page: page)
+//                                            }
+//                                        }
                                 }.buttonStyle(PlainButtonStyle())
                                 
                             }

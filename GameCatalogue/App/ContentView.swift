@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var homePresenter: HomePresenter
+    @EnvironmentObject var favoritePresenter: FavoritePresenter
     
     init() {
         UITabBar.appearance().barTintColor = UIColor.black
@@ -22,7 +23,7 @@ struct ContentView: View {
                     TabItem(imageName: "tray.fill", title: "Home")
                 }
             
-            GameFavorite()
+            GameFavorite(presenter: favoritePresenter)
                 .tabItem {
                     TabItem(imageName: "heart.fill", title: "Favorite")
                 }

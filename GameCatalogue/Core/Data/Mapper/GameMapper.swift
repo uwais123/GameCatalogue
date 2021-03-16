@@ -20,28 +20,45 @@ final class GameMapper {
                 released: result.released ?? "Unknown",
                 image: result.image ?? Constants.placeHolder,
                 rating: result.rating ?? 0.0,
-                playtime: result.playtime ?? 0
+                playtime: result.playtime ?? 0,
+                favorite: false
             )
         }
     }
     
     static func mapGameEntityToDomain(
+        input gameEntity: GameEntity
+    ) -> DetailGame {
+        
+        return DetailGame(
+            id: gameEntity.id,
+            name: gameEntity.name,
+            description: gameEntity.description,
+            released: gameEntity.released,
+            image: gameEntity.image,
+            rating: gameEntity.rating,
+            playtime: gameEntity.playtime
+        )
+    }
+    
+    static func mapGameEntitiesToDomains(
         input gameEntity: [GameEntity]
     ) -> [Game] {
         
-        return gameEntity.map { result in
+        return gameEntity.map { entity in
             return Game(
-                id: result.id,
-                name: result.name,
-                released: result.released,
-                image: result.image,
-                rating: result.rating,
-                playtime: result.playtime
+                id: entity.id,
+                name: entity.name,
+                released: entity.released,
+                image: entity.image,
+                rating: entity.rating,
+                playtime: entity.playtime,
+                favorite: entity.favorite
             )
         }
     }
     
-    static func mapResponseToEntity(
+    static func mapGameResponseToEntity(
         input gameResponse: [GameResponse]
     ) -> [GameEntity] {
         
@@ -53,6 +70,7 @@ final class GameMapper {
             entity.image = response.image ?? Constants.placeHolder
             entity.rating = response.rating ?? 0.0
             entity.playtime = response.playtime ?? 0
+            entity.favorite = false
             return entity
         }
     }

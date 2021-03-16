@@ -15,15 +15,7 @@ struct Game: Hashable ,Codable, Identifiable {
     let image: String
     let rating: Double
     let playtime: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case name
-        case released
-        case image = "background_image"
-        case rating
-        case playtime
-    }
+    let favorite: Bool
     
 }
 

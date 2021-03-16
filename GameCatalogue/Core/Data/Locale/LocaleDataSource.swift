@@ -11,9 +11,9 @@ import RealmSwift
 
 protocol LocaleDataSourceProtocol: class {
     
-    func getGames() -> AnyPublisher<[GameEntity], Error>
+    func getFavoriteGames() -> AnyPublisher<[GameEntity], Error>
     
-    func addGames(from games: [GameEntity]) -> AnyPublisher<Bool, Error>
+    func addFavoriteGames(id: Int) -> AnyPublisher<GameEntity, Error>
 }
 
 final class LocaleDataSource: NSObject {
@@ -30,7 +30,7 @@ final class LocaleDataSource: NSObject {
 
 extension LocaleDataSource: LocaleDataSourceProtocol {
     
-    func getGames() -> AnyPublisher<[GameEntity], Error> {
+    func getFavoriteGames() -> AnyPublisher<[GameEntity], Error> {
         return Future<[GameEntity], Error> { completion in
             if let realm = self.realm {
                 let games: Results<GameEntity> = {
@@ -44,24 +44,27 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
         }.eraseToAnyPublisher()
     }
     
-    func addGames(from games: [GameEntity]) -> AnyPublisher<Bool, Error> {
-        return Future<Bool, Error> { completion in
-            if let realm = self.realm {
-                do {
-                    try realm.write {
-                        for game in games {
-                          realm.add(game, update: .all)
+    func addFavoriteGames(id: Int) -> AnyPublisher<GameEntity, Error> {
+        return Future<GameEntity, Error> { completion in
+            if let gameEntity = {
+                self.realm?.objects(GameEntity.self).filter("id = \(id)")
+            }()?.first {
+                if let realm = self.realm {
+                    do {
+                        try realm.write {
+                            gameEntity.setValue(!gameEntity.favorite, forKey: "favorite")
                         }
-                        completion(.success(true))
+                        completion(.success(gameEntity))
+                    } catch {
+                        completion(.failure(DatabaseError.requestFailed))
                     }
-                } catch {
-                    completion(.failure(DatabaseError.requestFailed))
                 }
             } else {
                 completion(.failure(DatabaseError.invalidInstance))
             }
         }.eraseToAnyPublisher()
     }
+    
 }
 
 

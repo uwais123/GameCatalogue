@@ -16,12 +16,12 @@ struct GameCatalogueApp: App {
             let homeUseCase = Injection.init().provideHome()
             let homePresenter = HomePresenter(homeUseCase: homeUseCase)
             
-            let searchUseCase = Injection.init().provideSearch()
-            let searchPresenter = SearchPresenter(searchUseCase: searchUseCase)
+            let favoriteUseCase = Injection.init().provideFavorite()
+            let favoritePresenter = FavoritePresenter(favoriteUseCase: favoriteUseCase)
             
             ContentView()
                 .environmentObject(homePresenter)
-                .environmentObject(searchPresenter)
+                .environmentObject(favoritePresenter)
         }
     }
 }

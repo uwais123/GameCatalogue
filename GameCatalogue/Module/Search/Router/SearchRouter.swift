@@ -11,7 +11,8 @@ class SearchRouter {
     
     func makeDetailView(for idGame: Int) -> some View {
         let detailUseCase = Injection.init().provideDetail()
-        let presenter = DetailPresenter(detailUseCase: detailUseCase)
+        let favoriteUsecase = Injection.init().provideFavorite()
+        let presenter = DetailPresenter(detailUseCase: detailUseCase, favoriteUseCase: favoriteUsecase)
         return GameDetail(idGame: idGame, presenter: presenter)
     }
 }

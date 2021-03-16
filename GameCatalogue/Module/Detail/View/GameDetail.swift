@@ -58,10 +58,10 @@ struct GameDetail: View {
                                 
                                 Spacer()
                                 
-                                if isFavorite == false {
+                                if !isFavorite {
                                     Button(action: {
                                         isFavorite = true
-                                        // TODO = add game to db
+                                        self.presenter.addFavorites(idGame: idGame)
                                     }, label: {
                                         Image(systemName: "heart.circle.fill")
                                             .resizable()
@@ -69,7 +69,7 @@ struct GameDetail: View {
                                             .foregroundColor(.gray)
                                             .padding(.trailing)
                                     })
-                                } else if isFavorite == true {
+                                } else {
                                     Button(action: {}, label: {
                                         Image(systemName: "heart.circle.fill")
                                             .resizable()
