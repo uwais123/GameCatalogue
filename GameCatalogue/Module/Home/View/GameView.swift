@@ -16,7 +16,7 @@ struct GameView: View {
         NavigationView {
             VStack {
                 if presenter.loadingState {
-                    ProgressView(placeHolder: "Load Data..", show: true, animate: true)
+                    ActivityIndicator()
                 } else {
                     ScrollView {
                         self.presenter.linkToSearch() {
@@ -24,43 +24,24 @@ struct GameView: View {
                                 .padding(.top)
                                 .padding(.bottom)
                         }
-                        // Move Page
-                        HStack {
-                            Button(action: {
-                                page -= 1
-                                self.presenter.getGames(page: page)
-                            }, label: {
-                                if page == 1 {
-                                    Text("")
-                                } else {
-                                    Text("⬅️ Previous \(page - 1)")
-                                        .font(.footnote)
-                                        .foregroundColor(.secondary)
-                                }
-                                
-                            }).padding(.leading)
-                            
-                            Spacer()
-                            
-                            Button(action: {
-                                page += 1
-                                self.presenter.getGames(page: page)
-                            }, label: {
-                                Text("\(page + 1) Next ➡️")
-                                    .font(.footnote)
-                                    .foregroundColor(.secondary)
-                            }).padding(.trailing)
-                        }
                         LazyVGrid(columns: [
                             GridItem(.adaptive(minimum: 120), spacing: 20, alignment: .center)
                         ], alignment: .leading, spacing: 16, content: {
-                            ForEach(self.presenter.games) { item in
-                                self.presenter.linkToDetail(for: item.id) {
-                                    GameRow(game: item)
+                            ForEach(self.presenter.games.indices, id: \.self) { item in
+                                let game = presenter.games[item]
+                                self.presenter.linkToDetail(for: game.id) {
+                                    GameRow(game: game)
+                                        .onAppear {
+                                            if item == presenter.games.count - 1{
+                                                page += 1
+                                                presenter.getGames(page: page)
+                                            }
+                                        }
                                 }.buttonStyle(PlainButtonStyle())
                                 
                             }
                         }).padding(.horizontal, 12)
+                        
                     }
                 }
             }
@@ -108,11 +89,3 @@ struct SearchButton: View {
         
     }
 }
-
-
-//
-//struct GameMenu_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GameMenu()
-//    }
-//}

@@ -102,12 +102,6 @@ struct GameSearch: View {
                 .padding(.top)
                 .padding(.top)
             }
-//            else {
-//                VStack {
-//                    Image(systemName: "magnifyingglass")
-//                    Text("No Results")
-//                }
-//            }
         }
         .navigationTitle("Search")
     }

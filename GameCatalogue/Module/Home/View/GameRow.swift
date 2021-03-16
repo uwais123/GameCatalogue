@@ -14,7 +14,6 @@ struct GameRow: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 4) {
-            
             ZStack(alignment: .bottomTrailing) {
                 
                 WebImage(url: URL(string: game.image), options: .highPriority, context: nil)

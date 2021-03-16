@@ -23,6 +23,7 @@ class HomePresenter: ObservableObject {
         self.homeUseCase = homeUseCase
     }
     
+    
     func getGames(page: Int) {
         loadingState = true
         homeUseCase.getGames(page: page)
