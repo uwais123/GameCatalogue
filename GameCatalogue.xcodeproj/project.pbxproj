@@ -285,7 +285,6 @@
 		528BB32C25FFB3750093A93F /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				528BB32F25FFB3960093A93F /* Router */,
 				528BB32E25FFB38F0093A93F /* Presenter */,
 				528BB32D25FFB3880093A93F /* View */,
 			);
@@ -306,13 +305,6 @@
 				528BB34225FFBDCF0093A93F /* DetailPresenter.swift */,
 			);
 			path = Presenter;
-			sourceTree = "<group>";
-		};
-		528BB32F25FFB3960093A93F /* Router */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Router;
 			sourceTree = "<group>";
 		};
 		528BB34525FFC85D0093A93F /* Router */ = {

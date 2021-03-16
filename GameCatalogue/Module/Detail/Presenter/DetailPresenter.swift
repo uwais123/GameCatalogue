@@ -23,7 +23,7 @@ class DetailPresenter: ObservableObject {
     init(detailUseCase: DetailUseCase) {
         self.detailUseCase = detailUseCase
     }
-    
+
     func getDetail(idGame: Int) {
         loadingState = true
         detailUseCase.getDetail(idGame: idGame)
@@ -36,7 +36,7 @@ class DetailPresenter: ObservableObject {
                     self.loadingState = false
                 }
             }, receiveValue: { detailGame in
-                print(detailGame.id)
+                print(detailGame)
                 self.detailGame = detailGame
             })
             .store(in: &cancellables)

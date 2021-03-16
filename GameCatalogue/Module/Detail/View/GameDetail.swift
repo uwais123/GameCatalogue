@@ -48,7 +48,7 @@ struct GameDetail: View {
                                         .resizable()
                                         .frame(width: 15, height: 15)
                                         .foregroundColor(.yellow)
-                                    Text(String(0.0))
+                                    Text(String(presenter.detailGame.rating))
                                         .font(.subheadline)
                                         .bold()
                                 }

@@ -18,10 +18,29 @@ class SearchPresenter: ObservableObject {
     @Published var searchResults: [Game] = []
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
+    @Published var searchText: String = String()
     
     init(searchUseCase: SearchUseCase) {
         self.searchUseCase = searchUseCase
+        
+        $searchText
+            .debounce(for: .milliseconds(800), scheduler: RunLoop.main)
+            .removeDuplicates()
+            .map { string in
+                if string.count < 1 {
+                    self.searchResults = []
+                    return nil
+                }
+                return string
+            }
+            .compactMap { $0 }
+            .sink { (_) in
+                
+            } receiveValue: { searchField in
+                self.getSearch(query: searchField)
+            }.store(in: &cancellables)
     }
+    
     
     func getSearch(query: String) {
         loadingState = true

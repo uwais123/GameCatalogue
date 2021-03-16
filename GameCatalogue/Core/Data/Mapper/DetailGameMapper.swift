@@ -14,12 +14,12 @@ final class DetailGameMapper {
     ) -> DetailGame {
         
         return DetailGame(
-            id: detailGameResponse.id,
-            name: detailGameResponse.name,
-            description: detailGameResponse.description,
-            released: detailGameResponse.released,
-            image: detailGameResponse.image,
-            rating: detailGameResponse.rating,
-            playtime: detailGameResponse.playtime)
+            id: detailGameResponse.id ?? 0,
+            name: detailGameResponse.name ?? "Unknown",
+            description: detailGameResponse.description ?? "Unknown",
+            released: detailGameResponse.released ?? "Unknown",
+            image: detailGameResponse.image ?? Constants.placeHolder,
+            rating: detailGameResponse.rating ?? 0.0,
+            playtime: detailGameResponse.playtime ?? 0)
     }
 }

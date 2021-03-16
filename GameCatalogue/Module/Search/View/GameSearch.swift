@@ -11,16 +11,14 @@ import SwiftUI
 struct GameSearch: View {
     
     @ObservedObject var presenter: SearchPresenter
-    @State var query = ""
     @State var isSearching = false
-    @State var getSearchData = false
     
     var body: some View {
         ScrollView {
             // MARK: start textfield
             HStack {
                 HStack {
-                    TextField("Search Games..", text: $query)
+                    TextField("Search Games..", text: $presenter.searchText) // MARK: -- Reactive Search
                         .frame(height: 5)
                         .padding(.leading, 24)
                 }
@@ -38,7 +36,7 @@ struct GameSearch: View {
                         
                         if isSearching {
                             Button(action: {
-                                query = ""
+                                presenter.searchText = ""
                                 isSearching = false
                                 
                             }, label: {
@@ -56,9 +54,8 @@ struct GameSearch: View {
                 if isSearching {
                     Button(action: {
                         isSearching = true
-                        getSearchData = true
                         
-                        self.presenter.getSearch(query: self.query)
+                        self.presenter.getSearch(query: self.presenter.searchText)
                         
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                         
@@ -76,9 +73,9 @@ struct GameSearch: View {
             
             Spacer(minLength: 60)
             
-            if getSearchData == true {
+            if !self.presenter.searchText.isEmpty {
                 if self.presenter.loadingState {
-                    ProgressView(placeHolder: "Searching...", show: true, animate: true)
+                    ActivityIndicator()
                 } else {
                     LazyVGrid(columns: [
                         GridItem(.adaptive(minimum: 120), spacing: 20, alignment: .center)
@@ -91,7 +88,7 @@ struct GameSearch: View {
                     }).padding(.horizontal, 12)
                 }
                 
-            } else if getSearchData == false { // MARK: -- need to replace with lottie
+            } else { // MARK: -- need to replace with lottie
                 VStack {
                     Image(systemName: "magnifyingglass")
                         .resizable()
@@ -104,12 +101,13 @@ struct GameSearch: View {
                 }
                 .padding(.top)
                 .padding(.top)
-            } else {
-                VStack {
-                    Image(systemName: "magnifyingglass")
-                    Text("No Results")
-                }
             }
+//            else {
+//                VStack {
+//                    Image(systemName: "magnifyingglass")
+//                    Text("No Results")
+//                }
+//            }
         }
         .navigationTitle("Search")
     }

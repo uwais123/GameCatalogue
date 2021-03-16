@@ -9,13 +9,13 @@ import Foundation
 
 struct DetailGameResponse: Decodable {
     
-    let id: Int
-    let name: String
-    let description: String
-    let released: String
-    let image: String
-    let rating: Double
-    let playtime: Int
+    let id: Int?
+    let name: String?
+    let description: String?
+    let released: String?
+    let image: String?
+    let rating: Double?
+    let playtime: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
