@@ -67,6 +67,7 @@ extension GameView {
                                 }, secondaryButton: .default(Text("Yes")) {
                                     page += 1
                                     presenter.getGames(page: page)
+                                    print("current page: \(page)")
                                 })
                             }
                     }.buttonStyle(PlainButtonStyle())

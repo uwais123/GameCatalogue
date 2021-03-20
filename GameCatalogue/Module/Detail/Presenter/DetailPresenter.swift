@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class DetailPresenter: ObservableObject {
     
@@ -17,7 +18,7 @@ class DetailPresenter: ObservableObject {
     @Published var detailGame: DetailGame =
         DetailGame(id: 0, name: "", description: "", released: "", image: "", rating: 0.0, playtime: 0)
     
-    @Published var isFavorite: Bool = false
+    @State var isFavorite: Bool = false // ini penyebabnya guys
     
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
@@ -25,6 +26,24 @@ class DetailPresenter: ObservableObject {
     init(detailUseCase: DetailUseCase, favoriteUseCase: FavoriteUseCase) {
         self.detailUseCase = detailUseCase
         self.favoriteUseCase = favoriteUseCase
+    }
+    
+    func getDetail(idGame: Int) {
+        loadingState = true
+        detailUseCase.getDetail(idGame: idGame)
+            .receive(on: RunLoop.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .failure:
+                    self.errorMessage = String(describing: completion)
+                case .finished:
+                    self.loadingState = false
+                }
+            }, receiveValue: { detailGame in
+                print(detailGame)
+                self.detailGame = detailGame
+            })
+            .store(in: &cancellables)
     }
     
     func addFavoriteGames(from game: DetailGame) {
@@ -38,27 +57,26 @@ class DetailPresenter: ObservableObject {
                     print(completion)
                 }
             }, receiveValue: { isFavorite in
-                self.isFavorite = isFavorite
+                self.isFavorite.toggle()
             })
             .store(in: &cancellables)
     }
-
-    func getDetail(idGame: Int) {
-        loadingState = true
-        detailUseCase.getDetail(idGame: idGame)
+    
+    func removeFavoriteGame(idGame: String) {
+        favoriteUseCase.removeFavoriteGame(idGame: idGame)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure:
                     self.errorMessage = String(describing: completion)
                 case .finished:
-                    self.loadingState = false
+                    print(completion)
                 }
-            }, receiveValue: { detailGame in
-//                print(detailGame)
-                self.detailGame = detailGame
+            }, receiveValue: { isFavorite in
+                self.isFavorite.toggle()
             })
             .store(in: &cancellables)
     }
+    
     
 }

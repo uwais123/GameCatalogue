@@ -13,6 +13,8 @@ protocol FavoriteUseCase {
     func getFavoriteGames() -> AnyPublisher<[Game], Error>
 
     func addFavoriteGames(from game: DetailGame) -> AnyPublisher<Bool, Error>
+    
+    func removeFavoriteGame(idGame: String) -> AnyPublisher<Bool, Error>
 }
 
 class FavoriteInteractor: FavoriteUseCase {
@@ -29,6 +31,10 @@ class FavoriteInteractor: FavoriteUseCase {
     
     func addFavoriteGames(from game: DetailGame) -> AnyPublisher<Bool, Error> {
         return repository.addFavoriteGames(from: game)
+    }
+    
+    func removeFavoriteGame(idGame: String) -> AnyPublisher<Bool, Error> {
+        return repository.removeFavoriteGame(idGame: idGame)
     }
     
 }

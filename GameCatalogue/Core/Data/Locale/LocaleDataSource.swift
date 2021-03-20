@@ -14,6 +14,8 @@ protocol LocaleDataSourceProtocol: class {
     func getFavoriteGames() -> AnyPublisher<[GameEntity], Error>
     
     func addFavoriteGames(from game: GameEntity) -> AnyPublisher<Bool, Error>
+    
+    func removeFavoriteGame(idGame: String) -> AnyPublisher<Bool, Error>
 }
 
 final class LocaleDataSource: NSObject {
@@ -55,6 +57,27 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
                     }
                 } catch {
                     completion(.failure(DatabaseError.requestFailed))
+                }
+            } else {
+                completion(.failure(DatabaseError.invalidInstance))
+            }
+        }.eraseToAnyPublisher()
+    }
+    
+    func removeFavoriteGame(idGame: String) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error> { completion in
+            if let realm = self.realm {
+                if let gameEntity = {
+                    realm.objects(GameEntity.self).filter("id = \(idGame)")
+                }().first {
+                    do {
+                        try realm.write {
+                            realm.delete(gameEntity)
+                            completion(.success(true))
+                        }
+                    } catch {
+                        completion(.failure(DatabaseError.requestFailed))
+                    }
                 }
             } else {
                 completion(.failure(DatabaseError.invalidInstance))

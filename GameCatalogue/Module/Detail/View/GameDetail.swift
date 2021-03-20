@@ -12,7 +12,6 @@ struct GameDetail: View {
     
     let idGame: Int
     @ObservedObject var presenter: DetailPresenter
-    @State var isFavorite = false
     
     var body: some View {
         VStack {
@@ -86,7 +85,7 @@ extension GameDetail {
                             let _ = print(presenter.isFavorite)
                         } else {
                             Button(action: {
-                                // remove from db
+                                self.presenter.removeFavoriteGame(idGame: String(presenter.detailGame.id))
                             }, label: {
                                 Image(systemName: "heart.circle.fill")
                                     .resizable()
