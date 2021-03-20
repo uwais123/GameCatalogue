@@ -15,7 +15,9 @@ struct GameFavorite: View {
         NavigationView {
             ScrollView {
                 ForEach(self.presenter.favorites) { item in
-                    GameFavoritesRow(game: item)
+                    presenter.linkToDetail(for: item.id) {
+                        GameFavoritesRow(game: item)
+                    }.buttonStyle(PlainButtonStyle())
                 }
             }
             .onAppear {

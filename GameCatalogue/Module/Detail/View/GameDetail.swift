@@ -72,7 +72,7 @@ extension GameDetail {
                         
                         Spacer()
                         
-                        if !presenter.isFavorite {
+                        if presenter.isFavorite == false {
                             Button(action: {
                                 self.presenter.addFavoriteGames(from: presenter.detailGame)
                             }, label: {
@@ -82,16 +82,18 @@ extension GameDetail {
                                     .foregroundColor(.gray)
                                     .padding(.trailing)
                             })
+                            
+                            let _ = print(presenter.isFavorite)
                         } else {
-                            Button(action: {}, label: {
+                            Button(action: {
+                                // remove from db
+                            }, label: {
                                 Image(systemName: "heart.circle.fill")
                                     .resizable()
                                     .frame(width: 30, height: 30)
                                     .foregroundColor(.red)
                                     .padding(.trailing)
-                            }).alert(isPresented: $presenter.isFavorite) {
-                                Alert(title: Text("Game Added!"), message: Text("Your game has been added to your favorites list"), dismissButton: .default(Text("Got it!")))
-                            }
+                            })
                         }
                         
                     }.padding(.top)

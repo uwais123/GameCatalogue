@@ -32,10 +32,13 @@ extension GameFavoritesRow {
     var image: some View {
         WebImage(url: URL(string: game.image), options: .highPriority, context: nil)
             .resizable()
+            .aspectRatio(contentMode: .fill)
+            .clipped()
             .frame(width: 103, height: 103, alignment: .center)
             .cornerRadius(14)
             .padding(12)
             .shadow(radius: 5)
+            
     }
     
     var title: some View {

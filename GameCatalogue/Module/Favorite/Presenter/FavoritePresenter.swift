@@ -10,6 +10,7 @@ import Combine
 
 class FavoritePresenter: ObservableObject {
     
+    private let router = FavoriteRouter()
     private let favoriteUseCase: FavoriteUseCase
     private var cancellables: Set<AnyCancellable> = []
 
@@ -37,5 +38,14 @@ class FavoritePresenter: ObservableObject {
                 self.favorites = favorites
             })
             .store(in: &cancellables)
+    }
+    
+    func linkToDetail<Content: View>(
+        for idGame: Int,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        NavigationLink(
+            destination: router.makeDetailView(for: idGame)
+        ) { content() }
     }
 }

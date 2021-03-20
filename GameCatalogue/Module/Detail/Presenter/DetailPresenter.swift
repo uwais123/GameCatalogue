@@ -28,7 +28,6 @@ class DetailPresenter: ObservableObject {
     }
     
     func addFavoriteGames(from game: DetailGame) {
-//        loadingState = true
         favoriteUseCase.addFavoriteGames(from: game)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
