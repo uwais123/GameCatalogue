@@ -38,6 +38,7 @@ class SearchPresenter: ObservableObject {
                 
             } receiveValue: { searchField in
                 self.getSearch(query: searchField)
+                
             }.store(in: &cancellables)
     }
     
@@ -54,8 +55,13 @@ class SearchPresenter: ObservableObject {
                     self.loadingState = false
                 }
             }, receiveValue: { searchResults in
-                self.searchResults = searchResults
-                print(searchResults)
+                if searchResults.isEmpty {
+                    self.errorMessage = "No Results"
+                    print(self.errorMessage)
+                } else {
+                    self.searchResults = searchResults
+                    print(searchResults)
+                }
             })
             .store(in: &cancellables)
     }

@@ -85,7 +85,24 @@ struct GameSearch: View {
                                 GameSearchRow(game: item)
                             }.buttonStyle(PlainButtonStyle())
                         }
+                        
                     }).padding(.horizontal, 12)
+                    
+                    if presenter.searchResults.isEmpty {
+                        VStack {
+                            Image(systemName: "magnifyingglass")
+                                .resizable()
+                                .frame(width: 50, height: 50, alignment: .center)
+                                .foregroundColor(.secondary)
+                            
+                            Text(presenter.errorMessage)
+                                .foregroundColor(.secondary)
+                                .font(.subheadline)
+                                .bold()
+                        }
+                        .padding(.top)
+                        .padding(.top)
+                    }
                 }
                 
             } else { // MARK: -- need to replace with lottie
@@ -94,6 +111,7 @@ struct GameSearch: View {
                         .resizable()
                         .frame(width: 50, height: 50, alignment: .center)
                         .foregroundColor(.secondary)
+                    
                     Text("Search Games")
                         .foregroundColor(.secondary)
                         .font(.subheadline)

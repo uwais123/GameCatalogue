@@ -118,9 +118,9 @@
 		52068FEE259F62BE001E84C2 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				528BB34525FFC85D0093A93F /* Router */,
 				528BB31525FF6E9B0093A93F /* Presenter */,
 				528BB31425FF6E830093A93F /* View */,
+				528BB34525FFC85D0093A93F /* Router */,
 			);
 			path = Search;
 			sourceTree = "<group>";
