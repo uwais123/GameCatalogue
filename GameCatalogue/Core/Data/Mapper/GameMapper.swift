@@ -20,25 +20,9 @@ final class GameMapper {
                 released: result.released ?? "Unknown",
                 image: result.image ?? Constants.placeHolder,
                 rating: result.rating ?? 0.0,
-                playtime: result.playtime ?? 0,
-                favorite: false
+                playtime: result.playtime ?? 0
             )
         }
-    }
-    
-    static func mapGameEntityToDomain(
-        input gameEntity: GameEntity
-    ) -> DetailGame {
-        
-        return DetailGame(
-            id: gameEntity.id,
-            name: gameEntity.name,
-            description: gameEntity.description,
-            released: gameEntity.released,
-            image: gameEntity.image,
-            rating: gameEntity.rating,
-            playtime: gameEntity.playtime
-        )
     }
     
     static func mapGameEntitiesToDomains(
@@ -52,8 +36,7 @@ final class GameMapper {
                 released: entity.released,
                 image: entity.image,
                 rating: entity.rating,
-                playtime: entity.playtime,
-                favorite: entity.favorite
+                playtime: entity.playtime
             )
         }
     }
@@ -70,7 +53,6 @@ final class GameMapper {
             entity.image = response.image ?? Constants.placeHolder
             entity.rating = response.rating ?? 0.0
             entity.playtime = response.playtime ?? 0
-            entity.favorite = false
             return entity
         }
     }

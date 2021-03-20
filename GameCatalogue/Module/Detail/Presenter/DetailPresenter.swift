@@ -10,13 +10,14 @@ import Combine
 
 class DetailPresenter: ObservableObject {
     
-//    private let router =
     private let detailUseCase: DetailUseCase
     private let favoriteUseCase: FavoriteUseCase
     private var cancellables: Set<AnyCancellable> = []
     
     @Published var detailGame: DetailGame =
         DetailGame(id: 0, name: "", description: "", released: "", image: "", rating: 0.0, playtime: 0)
+    
+    @Published var isFavorite: Bool = false
     
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
@@ -26,20 +27,19 @@ class DetailPresenter: ObservableObject {
         self.favoriteUseCase = favoriteUseCase
     }
     
-    func addFavorites(idGame: Int) {
-        loadingState = true
-        favoriteUseCase.addFavoriteGames(idGame: idGame)
+    func addFavoriteGames(from game: DetailGame) {
+//        loadingState = true
+        favoriteUseCase.addFavoriteGames(from: game)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .failure:
                     self.errorMessage = String(describing: completion)
                 case .finished:
-                    self.loadingState = false
+                    print(completion)
                 }
-            }, receiveValue: { game in
-                print(game)
-                self.detailGame = game
+            }, receiveValue: { isFavorite in
+                self.isFavorite = isFavorite
             })
             .store(in: &cancellables)
     }
@@ -56,7 +56,7 @@ class DetailPresenter: ObservableObject {
                     self.loadingState = false
                 }
             }, receiveValue: { detailGame in
-                print(detailGame)
+//                print(detailGame)
                 self.detailGame = detailGame
             })
             .store(in: &cancellables)

@@ -18,7 +18,7 @@ protocol GameRepositoryProtocol {
     
     func getFavoriteGames() -> AnyPublisher<[Game], Error>
     
-    func addFavoriteGames(idGame: Int) -> AnyPublisher<DetailGame, Error>
+    func addFavoriteGames(from game: DetailGame) -> AnyPublisher<Bool, Error>
 }
 
 final class GameRepository: NSObject {
@@ -40,11 +40,12 @@ final class GameRepository: NSObject {
 
 extension GameRepository: GameRepositoryProtocol {
     
-    func addFavoriteGames(idGame: Int) -> AnyPublisher<DetailGame, Error> {
-        return self.locale.addFavoriteGames(id: idGame)
-            .map { GameMapper.mapGameEntityToDomain(input: $0) }
+    func addFavoriteGames(from game: DetailGame) -> AnyPublisher<Bool, Error> {
+        let entity = DetailGameMapper.mapDetailGameToEntity(input: game)
+        return self.locale.addFavoriteGames(from: entity)
             .eraseToAnyPublisher()
     }
+    
  
     func getFavoriteGames() -> AnyPublisher<[Game], Error> {
         return self.locale.getFavoriteGames()

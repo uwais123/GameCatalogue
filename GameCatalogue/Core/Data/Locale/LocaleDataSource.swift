@@ -13,7 +13,7 @@ protocol LocaleDataSourceProtocol: class {
     
     func getFavoriteGames() -> AnyPublisher<[GameEntity], Error>
     
-    func addFavoriteGames(id: Int) -> AnyPublisher<GameEntity, Error>
+    func addFavoriteGames(from game: GameEntity) -> AnyPublisher<Bool, Error>
 }
 
 final class LocaleDataSource: NSObject {
@@ -44,20 +44,17 @@ extension LocaleDataSource: LocaleDataSourceProtocol {
         }.eraseToAnyPublisher()
     }
     
-    func addFavoriteGames(id: Int) -> AnyPublisher<GameEntity, Error> {
-        return Future<GameEntity, Error> { completion in
-            if let gameEntity = {
-                self.realm?.objects(GameEntity.self).filter("id = \(id)")
-            }()?.first {
-                if let realm = self.realm {
-                    do {
-                        try realm.write {
-                            gameEntity.setValue(!gameEntity.favorite, forKey: "favorite")
-                        }
-                        completion(.success(gameEntity))
-                    } catch {
-                        completion(.failure(DatabaseError.requestFailed))
+    
+    func addFavoriteGames(from game: GameEntity) -> AnyPublisher<Bool, Error> {
+        return Future<Bool, Error> { completion in
+            if let realm = self.realm {
+                do {
+                    try realm.write {
+                        realm.add(game, update: .all)
+                        completion(.success(true))
                     }
+                } catch {
+                    completion(.failure(DatabaseError.requestFailed))
                 }
             } else {
                 completion(.failure(DatabaseError.invalidInstance))

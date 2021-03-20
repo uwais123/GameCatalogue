@@ -15,7 +15,6 @@ struct Game: Hashable ,Codable, Identifiable {
     let image: String
     let rating: Double
     let playtime: Int
-    let favorite: Bool
     
 }
 
