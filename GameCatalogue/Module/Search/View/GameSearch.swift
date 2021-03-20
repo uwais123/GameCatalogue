@@ -90,7 +90,7 @@ struct GameSearch: View {
                     
                     if presenter.searchResults.isEmpty {
                         VStack {
-                            Image(systemName: "magnifyingglass")
+                            Image(systemName: "shippingbox.fill")
                                 .resizable()
                                 .frame(width: 50, height: 50, alignment: .center)
                                 .foregroundColor(.secondary)

@@ -11,6 +11,7 @@ struct GameView: View {
     
     @ObservedObject var presenter: HomePresenter
     @State private var page = 1
+    @State private var isLoadMore = false
     
     var body: some View {
         NavigationView {
@@ -18,31 +19,7 @@ struct GameView: View {
                 if presenter.loadingState {
                     ActivityIndicator()
                 } else {
-                    ScrollView {
-                        self.presenter.linkToSearch() {
-                            SearchButton()
-                                .padding(.top)
-                                .padding(.bottom)
-                        }
-                        LazyVGrid(columns: [
-                            GridItem(.adaptive(minimum: 120), spacing: 20, alignment: .center)
-                        ], alignment: .leading, spacing: 16, content: {
-                            ForEach(self.presenter.games.indices, id: \.self) { item in
-                                let game = presenter.games[item]
-                                self.presenter.linkToDetail(for: game.id) {
-                                    GameRow(game: game) // MARK: -- Implement paging
-//                                        .onAppear {
-//                                            if item == presenter.games.count - 1{
-//                                                page += 1
-//                                                presenter.getGames(page: page)
-//                                            }
-//                                        }
-                                }.buttonStyle(PlainButtonStyle())
-                                
-                            }
-                        }).padding(.horizontal, 12)
-                        
-                    }
+                    content
                 }
             }
             .navigationTitle("Games")
@@ -62,6 +39,43 @@ struct GameView: View {
         .edgesIgnoringSafeArea(.all)
     }
     
+}
+
+extension GameView {
+    var content: some View {
+        ScrollView {
+            self.presenter.linkToSearch() {
+                SearchButton()
+                    .padding(.top)
+                    .padding(.bottom)
+            }
+            LazyVGrid(columns: [
+                GridItem(.adaptive(minimum: 120), spacing: 20, alignment: .center)
+            ], alignment: .leading, spacing: 16, content: {
+                ForEach(self.presenter.games.indices, id: \.self) { item in
+                    let game = presenter.games[item]
+                    self.presenter.linkToDetail(for: game.id) {
+                        GameRow(game: game) // MARK: -- Implement paging
+                            .onAppear {
+                                if item == presenter.games.count - 1{
+                                    isLoadMore = true
+                                }
+                            }
+                            .alert(isPresented: $isLoadMore) {
+                                Alert(title: Text("Load more data?"), message: Text("click yes to load more data"), primaryButton: .destructive(Text("No")) {
+                                    isLoadMore = false
+                                }, secondaryButton: .default(Text("Yes")) {
+                                    page += 1
+                                    presenter.getGames(page: page)
+                                })
+                            }
+                    }.buttonStyle(PlainButtonStyle())
+                    
+                }
+            }).padding(.horizontal, 12)
+            
+        }
+    }
 }
 
 struct SearchButton: View {
