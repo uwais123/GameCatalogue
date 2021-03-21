@@ -34,7 +34,7 @@ class FavoritePresenter: ObservableObject {
                     self.loadingState = false
                 }
             }, receiveValue: { favorites in
-                print(favorites)
+                print("all favorites: \(favorites)")
                 self.favorites = favorites
             })
             .store(in: &cancellables)

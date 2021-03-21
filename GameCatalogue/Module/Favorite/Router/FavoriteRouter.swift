@@ -13,6 +13,6 @@ class FavoriteRouter {
         let detailUseCase = Injection.init().provideDetail()
         let favoriteUseCase = Injection.init().provideFavorite()
         let presenter = DetailPresenter(detailUseCase: detailUseCase, favoriteUseCase: favoriteUseCase)
-        return GameDetail(idGame: idGame, presenter: presenter)
+        return GameDetail(idGame: idGame, isFavorite: true, presenter: presenter)
     }
 }

@@ -11,7 +11,9 @@ import SDWebImageSwiftUI
 struct GameDetail: View {
     
     let idGame: Int
+    let isFavorite: Bool
     @ObservedObject var presenter: DetailPresenter
+    @State var favorite = false
     
     var body: some View {
         VStack {
@@ -36,18 +38,19 @@ extension GameDetail {
             VStack(alignment: .leading) {
                 WebImage(url: URL(string: self.presenter.detailGame.image), options: .highPriority, context: nil)
                     .resizable()
+                    .clipped()
                     .frame(height: 200, alignment: .center)
                     .cornerRadius(9)
                 
                 VStack(alignment: .leading) {
-                    Text(self.presenter.detailGame.name )
+                    Text(self.presenter.detailGame.name)
                         .font(.title2)
                         .bold()
-                    Text("Average Playtime: \(String(self.presenter.detailGame.playtime )) Hours")
+                    Text("Average Playtime: \(String(self.presenter.detailGame.playtime)) Hours")
                         .font(.subheadline)
                     
                     HStack {
-                        Text(self.presenter.detailGame.released )
+                        Text(self.presenter.detailGame.released)
                             .font(.footnote)
                             .bold()
                             .foregroundColor(.black)
@@ -71,28 +74,24 @@ extension GameDetail {
                         
                         Spacer()
                         
-                        if presenter.isFavorite == false {
-                            Button(action: {
-                                self.presenter.addFavoriteGames(from: presenter.detailGame)
-                            }, label: {
-                                Image(systemName: "heart.circle.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(.gray)
-                                    .padding(.trailing)
-                            })
+                        // MARK: -- this is so unelegant way to this, but i've no idea :))
+                        if !isFavorite {
+                            HStack{}
+                                .onAppear {
+                                    favorite = false
+                                }
                             
-                            let _ = print(presenter.isFavorite)
                         } else {
-                            Button(action: {
-                                self.presenter.removeFavoriteGame(idGame: String(presenter.detailGame.id))
-                            }, label: {
-                                Image(systemName: "heart.circle.fill")
-                                    .resizable()
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(.red)
-                                    .padding(.trailing)
-                            })
+                            HStack{}
+                                .onAppear {
+                                    favorite = true
+                                }
+                        }
+                        
+                        if !favorite {
+                            favoriteButton
+                        } else {
+                            unfavoriteButton
                         }
                         
                     }.padding(.top)
@@ -110,5 +109,31 @@ extension GameDetail {
             }
             .padding(.horizontal)
         }
+    }
+    
+    var favoriteButton: some View {
+        Button(action: {
+            self.presenter.addFavoriteGames(from: presenter.detailGame)
+            favorite = true
+        }, label: {
+            Image(systemName: "heart.circle.fill")
+                .resizable()
+                .frame(width: 30, height: 30)
+                .foregroundColor(.gray)
+                .padding(.trailing)
+        })
+    }
+    
+    var unfavoriteButton: some View {
+        Button(action: {
+            self.presenter.removeFavoriteGame(idGame: String(presenter.detailGame.id))
+            favorite = false
+        }, label: {
+            Image(systemName: "heart.circle.fill")
+                .resizable()
+                .frame(width: 30, height: 30)
+                .foregroundColor(.red)
+                .padding(.trailing)
+        })
     }
 }

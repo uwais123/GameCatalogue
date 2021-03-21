@@ -15,61 +15,7 @@ struct GameSearch: View {
     
     var body: some View {
         ScrollView {
-            // MARK: start textfield
-            HStack {
-                HStack {
-                    TextField("Search Games..", text: $presenter.searchText) // MARK: -- Reactive Search
-                        .frame(height: 5)
-                        .padding(.leading, 24)
-                }
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
-                .padding(.horizontal)
-                .onTapGesture(perform: {
-                    isSearching = true
-                })
-                .overlay(
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                        Spacer()
-                        
-                        if isSearching {
-                            Button(action: {
-                                presenter.searchText = ""
-                                isSearching = false
-                                
-                            }, label: {
-                                Image(systemName: "xmark.circle.fill")
-                                    .padding(.vertical)
-                            })
-                            
-                        }
-                        
-                    }.padding(.horizontal, 32)
-                    .foregroundColor(.gray)
-                ).transition(.move(edge: .trailing))
-                .animation(.spring())
-                
-                if isSearching {
-                    Button(action: {
-                        isSearching = true
-                        
-                        self.presenter.getSearch(query: self.presenter.searchText)
-                        
-                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                        
-                    }, label: {
-                        Text("Search")
-                            .padding(.trailing)
-                            .padding(.leading, 0)
-                    })
-                    .transition(.move(edge: .trailing))
-                    .animation(.spring())
-                }
-                
-            }
-            // MARK: end textfield
+            searchButton // search textfield
             
             Spacer(minLength: 60)
             
@@ -105,7 +51,7 @@ struct GameSearch: View {
                     }
                 }
                 
-            } else { // MARK: -- need to replace with lottie
+            } else { // MARK: -- i want to replace it with lottie
                 VStack {
                     Image(systemName: "magnifyingglass")
                         .resizable()
@@ -122,5 +68,63 @@ struct GameSearch: View {
             }
         }
         .navigationTitle("Search")
+    }
+}
+
+extension GameSearch {
+    var searchButton: some View {
+        HStack {
+            HStack {
+                TextField("Search Games..", text: $presenter.searchText) // MARK: -- Reactive Search
+                    .frame(height: 5)
+                    .padding(.leading, 24)
+            }
+            .padding()
+            .background(Color(.systemGray6))
+            .cornerRadius(10)
+            .padding(.horizontal)
+            .onTapGesture(perform: {
+                isSearching = true
+            })
+            .overlay(
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                    Spacer()
+                    
+                    if isSearching {
+                        Button(action: {
+                            presenter.searchText = ""
+                            isSearching = false
+                            
+                        }, label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .padding(.vertical)
+                        })
+                        
+                    }
+                    
+                }.padding(.horizontal, 32)
+                .foregroundColor(.gray)
+            ).transition(.move(edge: .trailing))
+            .animation(.spring())
+            
+            if isSearching {
+                Button(action: {
+                    isSearching = true
+                    
+                    self.presenter.getSearch(query: self.presenter.searchText)
+                    
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                    
+                }, label: {
+                    Text("Search")
+                        .padding(.trailing)
+                        .padding(.leading, 0)
+                })
+                .transition(.move(edge: .trailing))
+                .animation(.spring())
+            }
+            
+        }
     }
 }

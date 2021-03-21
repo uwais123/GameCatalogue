@@ -13,7 +13,7 @@ class SearchRouter {
         let detailUseCase = Injection.init().provideDetail()
         let favoriteUsecase = Injection.init().provideFavorite()
         let presenter = DetailPresenter(detailUseCase: detailUseCase, favoriteUseCase: favoriteUsecase)
-        return GameDetail(idGame: idGame, presenter: presenter)
+        return GameDetail(idGame: idGame, isFavorite: false, presenter: presenter)
     }
 }
 

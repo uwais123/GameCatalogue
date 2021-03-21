@@ -15,11 +15,8 @@ class DetailPresenter: ObservableObject {
     private let favoriteUseCase: FavoriteUseCase
     private var cancellables: Set<AnyCancellable> = []
     
-    @Published var detailGame: DetailGame =
-        DetailGame(id: 0, name: "", description: "", released: "", image: "", rating: 0.0, playtime: 0)
-    
-    @State var isFavorite: Bool = false // ini penyebabnya guys
-    
+    @Published var detailGame: DetailGame = DetailGame()
+        
     @Published var errorMessage: String = ""
     @Published var loadingState: Bool = false
     
@@ -57,7 +54,7 @@ class DetailPresenter: ObservableObject {
                     print(completion)
                 }
             }, receiveValue: { isFavorite in
-                self.isFavorite.toggle()
+                print("add favorite success: \(isFavorite)")
             })
             .store(in: &cancellables)
     }
@@ -72,8 +69,8 @@ class DetailPresenter: ObservableObject {
                 case .finished:
                     print(completion)
                 }
-            }, receiveValue: { isFavorite in
-                self.isFavorite.toggle()
+            }, receiveValue: { isRemoveFavorite in
+                print("remove favorite: \(isRemoveFavorite)")
             })
             .store(in: &cancellables)
     }
